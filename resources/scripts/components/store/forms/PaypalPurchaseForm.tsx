@@ -36,7 +36,6 @@ export default () => {
 
     return (
         <TitledGreyBox title={'通过 PayPal 购买'}>
-            <p css={tw`text-sm`}>100 {currency} 等于 1 美元。</p>
             <Dialog open={submitting} hideCloseIcon onClose={() => undefined}>
                 您现在将被带到 PayPal 网关以完成此交易。
             </Dialog>
@@ -59,16 +58,16 @@ export default () => {
                             选择金额...
                         </option>
                         <option key={'paypal:buy:100'} value={100}>
-                            购买 100 {currency}
+                            购买 100 积分
                         </option>
                         <option key={'paypal:buy:200'} value={200}>
-                            购买 200 {currency}
+                            购买 200 积分
                         </option>
                         <option key={'paypal:buy:500'} value={500}>
-                            购买 500 {currency}
+                            购买 500 积分
                         </option>
                         <option key={'paypal:buy:1000'} value={1000}>
-                            购买 1000 {currency}
+                            购买 1000 积分
                         </option>
                     </Select>
                     <div css={tw`mt-6`}>

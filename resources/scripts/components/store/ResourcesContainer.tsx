@@ -89,7 +89,7 @@ export default () => {
                         购买 CPU 以提高服务器性能。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每 50% CPU: {cost.cpu} {currency}
+                        Cost per 50% CPU: {cost.cpu} credits
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买内存'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -110,7 +110,7 @@ export default () => {
                         购买内存以提高服务器性能。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每 1GB 内存: {cost.memory} {currency}
+                        Cost per 1GB RAM: {cost.memory} credits
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买存储空间'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -131,7 +131,7 @@ export default () => {
                         购买存储空间以提高服务器容量。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每 1GB 存储空间: {cost.disk} {currency}
+                        Cost per 1GB disk: {cost.disk} credits
                     </p>
                 </TitledGreyBox>
             </Container>
@@ -154,7 +154,7 @@ export default () => {
                         购买服务器位以部署服务器实例。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每个位置: {cost.slot} {currency}
+                        Cost per slot: {cost.slot} credits
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器端口'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -175,7 +175,7 @@ export default () => {
                         购买端口以连接到您的服务器。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每个端口: {cost.port} {currency}
+                        Cost per port: {cost.port} credits
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器备份槽位'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -196,7 +196,7 @@ export default () => {
                         购买备份槽位来保护你的数据。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每个备份槽位: {cost.backup} {currency}
+                        Cost per backup slot: {cost.backup} credits
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器数据库'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -215,7 +215,7 @@ export default () => {
                     </Wrapper>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>购买数据库来存储数据。</p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每个数据库: {cost.database} {currency}
+                        Cost per database: {cost.database} credits
                     </p>
                 </TitledGreyBox>
             </Container>
