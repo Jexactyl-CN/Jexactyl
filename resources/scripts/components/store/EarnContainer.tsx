@@ -27,7 +27,6 @@ const Container = styled.div`
 export default () => {
     const [resources, setResources] = useState<Resources>();
     const earn = useStoreState((state) => state.storefront.data!.earn);
-    const store = useStoreState((state) => state.storefront.data!);
 
     useEffect(() => {
         getResources().then((resources) => setResources(resources));

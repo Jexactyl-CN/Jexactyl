@@ -2,7 +2,6 @@ import tw from 'twin.macro';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import useFlash from '@/plugins/useFlash';
-import { useStoreState } from '@/state/hooks';
 import paypal from '@/api/store/gateways/paypal';
 import Select from '@/components/elements/Select';
 import { Dialog } from '@/components/elements/dialog';
@@ -15,7 +14,6 @@ export default () => {
     const { clearAndAddHttpError } = useFlash();
     const [amount, setAmount] = useState(0);
     const [submitting, setSubmitting] = useState(false);
-    const currency = useStoreState((state) => state.storefront.data!.currency);
 
     const submit = () => {
         setSubmitting(true);
