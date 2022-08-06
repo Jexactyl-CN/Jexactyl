@@ -95,7 +95,7 @@ class AccountControllerTest extends ClientApiIntegrationTestCase
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonPath('errors.0.meta.rule', 'email');
-        $response->assertJsonPath('errors.0.detail', 'email 必须是有效的电子邮件地址。');
+        $response->assertJsonPath('errors.0.detail', 'email 不是一个合法的邮箱。');
     }
 
     /**
@@ -183,6 +183,6 @@ class AccountControllerTest extends ClientApiIntegrationTestCase
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonPath('errors.0.meta.rule', 'confirmed');
-        $response->assertJsonPath('errors.0.detail', 'password 确认不匹配。');
+        $response->assertJsonPath('errors.0.detail', 'password 两次输入不一致。');
     }
 }
