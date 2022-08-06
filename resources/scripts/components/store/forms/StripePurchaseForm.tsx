@@ -2,7 +2,7 @@ import tw from 'twin.macro';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import useFlash from '@/plugins/useFlash';
-import stripe from '@/api/store/gateways/stripe';
+import paypal from '@/api/store/gateways/paypal';
 import Select from '@/components/elements/Select';
 import { Dialog } from '@/components/elements/dialog';
 import { Button } from '@/components/elements/button/index';
@@ -18,7 +18,7 @@ export default () => {
     const submit = () => {
         setSubmitting(true);
 
-        stripe(amount)
+        paypal(amount)
             .then((url) => {
                 setSubmitting(false);
 
@@ -28,16 +28,16 @@ export default () => {
             .catch((error) => {
                 setSubmitting(false);
 
-                clearAndAddHttpError({ key: 'store:stripe', error });
+                clearAndAddHttpError({ key: 'store:paypal', error });
             });
     };
 
     return (
-        <TitledGreyBox title={'购买 via Stripe'}>
+        <TitledGreyBox title={'Purchase via PayPal'}>
             <Dialog open={submitting} hideCloseIcon onClose={() => undefined}>
-                您现在被带到 Stripe 网关以完成此交易。
+                您现在将被带到 PayPal 网关以完成此交易。
             </Dialog>
-            <FlashMessageRender byKey={'store:stripe'} css={tw`mb-2`} />
+            <FlashMessageRender byKey={'store:paypal'} css={tw`mb-2`} />
             <Formik
                 onSubmit={submit}
                 initialValues={{
@@ -52,25 +52,25 @@ export default () => {
                         // @ts-expect-error this is valid
                         onChange={(e) => setAmount(e.target.value)}
                     >
-                        <option key={'stripe:placeholder'} hidden>
+                        <option key={'paypal:placeholder'} hidden>
                             选择金额...
                         </option>
-                        <option key={'stripe:buy:100'} value={100}>
-                            购买 100 积分
+                        <option key={'paypal:buy:100'} value={100}>
+                            Purchase 100 积分
                         </option>
-                        <option key={'stripe:buy:200'} value={200}>
-                            购买 200 积分
+                        <option key={'paypal:buy:200'} value={200}>
+                            Purchase 200 积分
                         </option>
-                        <option key={'stripe:buy:500'} value={500}>
-                            购买 500 积分
+                        <option key={'paypal:buy:500'} value={500}>
+                            Purchase 500 积分
                         </option>
-                        <option key={'stripe:buy:1000'} value={1000}>
-                            购买 1000 积分
+                        <option key={'paypal:buy:1000'} value={1000}>
+                            Purchase 1000 积分
                         </option>
                     </Select>
                     <div css={tw`mt-6`}>
                         <Button type={'submit'} disabled={submitting}>
-                            通过 Stripe 购买
+                            通过 PayPal 购买
                         </Button>
                     </div>
                 </Form>
