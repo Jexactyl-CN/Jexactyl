@@ -22,23 +22,23 @@ export default () => {
         <>
             {store.earn.enabled ? (
                 <InformationBox icon={faCircle} iconCss={'animate-pulse'}>
-                    Earning <span className={'text-green-600'}>{store.earn.amount}</span> credits / min.
+                    获取 <span className={'text-green-600'}>{store.earn.amount}</span> 积分 / 分钟.
                 </InformationBox>
             ) : (
                 <InformationBox icon={faExclamationCircle}>
-                    Credit earning is currently <span className={'text-red-600'}>disabled.</span>
+                    积分获取目前<span className={'text-red-600'}>已禁用.</span>
                 </InformationBox>
             )}
             <InformationBox icon={faCoins}>
-                You have <span className={'text-green-600'}>{bal}</span> credits available.
+                    您有 <span className={'text-green-600'}>{bal}</span> 个可用积分.
             </InformationBox>
             {user.useTotp ? (
                 <InformationBox icon={faUserLock}>
-                    <span className={'text-green-600'}>2FA is enabled</span> on your account.
+                    您的帐户<span className={'text-green-600'}>已启用动态口令认证</span>.
                 </InformationBox>
             ) : (
                 <InformationBox icon={faUserLock}>
-                    <span className={'text-yellow-600'}>Enable 2FA</span> to secure your account.
+                    <span className={'text-yellow-600'}>启用动态口令认证</span> 以保护您的帐户.
                 </InformationBox>
             )}
             <InformationBox icon={faScroll}>

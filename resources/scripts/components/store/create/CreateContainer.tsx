@@ -255,7 +255,7 @@ export default () => {
                                 size={Button.Sizes.Large}
                                 disabled={loading}
                             >
-                                Create <Icon.ArrowRightCircle className={'ml-2'} />
+                                创建 <Icon.ArrowRightCircle className={'ml-2'} />
                             </Button>
                         </div>
                     </InputSpinner>

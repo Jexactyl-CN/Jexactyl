@@ -60,9 +60,9 @@
                                 <div>
                                     <div class="input-group">
                                         <input type="text" id="cost" name="cost" class="form-control" value="{{ $cost }}" />
-                                        <span class="input-group-addon">credits</span>
+                                        <span class="input-group-addon">积分</span>
                                     </div>
-                                    <p class="text-muted"><small>Determines the amount of credits that a renewal costs.</small></p>
+                                    <p class="text-muted"><small>确定续订费用的积分额度。</small></p>
                                 </div>
                             </div>
                         </div>
