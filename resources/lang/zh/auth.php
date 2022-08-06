@@ -11,7 +11,7 @@
 return [
     'sign_in' => '登入',
     'go_to_login' => '前往登录',
-    'failed' => '找不到与这些凭证相匹配的帐户。',
+    'failed' => '用户名或密码错误。',
 
     'forgot_password' => [
         'label' => '忘记密码？',
