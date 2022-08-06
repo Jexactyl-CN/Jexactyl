@@ -2,6 +2,7 @@ import tw from 'twin.macro';
 import { Form, Formik } from 'formik';
 import React, { useState } from 'react';
 import useFlash from '@/plugins/useFlash';
+import { useStoreState } from '@/state/hooks';
 import paypal from '@/api/store/gateways/paypal';
 import Select from '@/components/elements/Select';
 import { Dialog } from '@/components/elements/dialog';
@@ -14,6 +15,7 @@ export default () => {
     const { clearAndAddHttpError } = useFlash();
     const [amount, setAmount] = useState(0);
     const [submitting, setSubmitting] = useState(false);
+    const currency = useStoreState((state) => state.storefront.data!.currency);
 
     const submit = () => {
         setSubmitting(true);
@@ -33,7 +35,8 @@ export default () => {
     };
 
     return (
-        <TitledGreyBox title={'Purchase via PayPal'}>
+        <TitledGreyBox title={'通过 PayPal 购买'}>
+            <p css={tw`text-sm`}>100 {currency} 等于 1 美元。</p>
             <Dialog open={submitting} hideCloseIcon onClose={() => undefined}>
                 您现在将被带到 PayPal 网关以完成此交易。
             </Dialog>
@@ -56,16 +59,16 @@ export default () => {
                             选择金额...
                         </option>
                         <option key={'paypal:buy:100'} value={100}>
-                            Purchase 100 积分
+                            购买 100 {currency}
                         </option>
                         <option key={'paypal:buy:200'} value={200}>
-                            Purchase 200 积分
+                            购买 200 {currency}
                         </option>
                         <option key={'paypal:buy:500'} value={500}>
-                            Purchase 500 积分
+                            购买 500 {currency}
                         </option>
                         <option key={'paypal:buy:1000'} value={1000}>
-                            Purchase 1000 积分
+                            购买 1000 {currency}
                         </option>
                     </Select>
                     <div css={tw`mt-6`}>

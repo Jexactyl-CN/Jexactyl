@@ -31,12 +31,8 @@ class EditController extends ClientApiController
      */
     public function index(EditServerRequest $request, Server $server): JsonResponse
     {
-        if ($this->settings->get('jexactyl::renewal:editing') == 'false') {
-            throw new DisplayException('Server editing is currently disabled.');
-        };
+       $this->editService->handle($request, $server);
 
-        $this->editService->handle($request, $server);
-
-        return new JsonResponse([], Response::HTTP_NO_CONTENT);
+       return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
 }

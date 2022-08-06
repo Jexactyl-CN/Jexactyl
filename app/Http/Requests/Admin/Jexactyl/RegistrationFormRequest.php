@@ -17,6 +17,7 @@ class RegistrationFormRequest extends AdminFormRequest
             'discord:enabled' => 'required|in:true,false',
             'discord:id' => 'required|int',
             'discord:secret' => 'required|string',
+            'discord:redirect' => 'required|string|max:191',
 
             'registration:cpu' => 'required|int',
             'registration:memory' => 'required|int',

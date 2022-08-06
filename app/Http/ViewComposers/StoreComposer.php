@@ -32,10 +32,6 @@ class StoreComposer extends Composer
                 'days' => $this->setting('renewal:default', Composer::TYPE_INT),
             ],
 
-            'editing' => [
-                'enabled' => $this->setting('renewal:editing', Composer::TYPE_BOOL),
-            ],
-
             'referrals' => [
                 'enabled' => $this->setting('referrals:enabled', Composer::TYPE_BOOL),
                 'reward' => $this->setting('referrals:reward', Composer::TYPE_INT),

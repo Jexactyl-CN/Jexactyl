@@ -16,10 +16,12 @@ class EggTransformer extends BaseClientTransformer
     }
 
     /**
-     * Transforms the Egg model into a representation that can be consumed by
+     * Transform an Egg model into a representation that can be consumed by
      * the application api.
+     *
+     * @return array
      */
-    public function transform(Egg $model): array
+    public function transform(Egg $model)
     {
         return [
             'id' => $model->id,

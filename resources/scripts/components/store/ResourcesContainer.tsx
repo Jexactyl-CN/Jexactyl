@@ -38,6 +38,7 @@ export default () => {
 
     const { addFlash, clearFlashes, clearAndAddHttpError } = useFlash();
     const cost = useStoreState((state) => state.storefront.data!.cost);
+    const currency = useStoreState((state) => state.storefront.data!.currency);
 
     const purchase = (resource: string) => {
         clearFlashes('store:resources');
@@ -88,7 +89,7 @@ export default () => {
                         购买 CPU 以提高服务器性能。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per 50% CPU: {cost.cpu} 积分
+                        每 50% CPU: {cost.cpu} {currency}
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买内存'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -109,7 +110,7 @@ export default () => {
                         购买内存以提高服务器性能。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per 1GB RAM: {cost.memory} 积分
+                        每 1GB 内存: {cost.memory} {currency}
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买存储空间'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -130,7 +131,7 @@ export default () => {
                         购买存储空间以提高服务器容量。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per 1GB disk: {cost.disk} 积分
+                        每 1GB 存储空间: {cost.disk} {currency}
                     </p>
                 </TitledGreyBox>
             </Container>
@@ -153,7 +154,7 @@ export default () => {
                         购买服务器位以部署服务器实例。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per slot: {cost.slot} 积分
+                        每个位置: {cost.slot} {currency}
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器端口'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -174,7 +175,7 @@ export default () => {
                         购买端口以连接到您的服务器。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per port: {cost.port} 积分
+                        每个端口: {cost.port} {currency}
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器备份槽位'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -195,7 +196,7 @@ export default () => {
                         购买备份槽位来保护你的数据。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per backup slot: {cost.backup} 积分
+                        每个备份槽位: {cost.backup} {currency}
                     </p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器数据库'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
@@ -214,7 +215,7 @@ export default () => {
                     </Wrapper>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>购买数据库来存储数据。</p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        Cost per database: {cost.database} 积分
+                        每个数据库: {cost.database} {currency}
                     </p>
                 </TitledGreyBox>
             </Container>
