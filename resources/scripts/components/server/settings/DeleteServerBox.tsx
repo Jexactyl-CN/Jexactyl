@@ -44,7 +44,7 @@ export default () => {
     }, []);
 
     return (
-        <TitledGreyBox title={'删除服务器实例'} css={tw`relative`}>
+        <TitledGreyBox title={'删除服务器实例'} css={tw`relative mb-12`}>
             <Dialog.Confirm
                 open={modalVisible}
                 title={'确认删除服务器实例'}
