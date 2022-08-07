@@ -4,7 +4,7 @@ namespace Pterodactyl\Http\Requests\Api\Client\Servers;
 
 use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
 
-class DeleteServerRequest extends ClientApiRequest
+class UpdateBackgroundRequest extends ClientApiRequest
 {
     /**
      * Determine if a client has permission to view this server on the API. This
@@ -22,7 +22,7 @@ class DeleteServerRequest extends ClientApiRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|string',
+            'bg' => 'required|url',
         ];
     }
 }

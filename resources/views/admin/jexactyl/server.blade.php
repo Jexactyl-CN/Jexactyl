@@ -69,14 +69,14 @@
                     </div>
                 </div>
                 <div class="box
-                    @if($enabled == 'true')
+                    @if($editing == 'true')
                         box-success
                     @else
                         box-danger
                     @endif
                 ">
                     <div class="box-header with-border">
-                        <i class="fa fa-clock-o"></i> <h3 class="box-title">服务器续订 <small>配置服务器续订设置。</small></h3>
+                        <i class="fa fa-server"></i> <h3 class="box-title">服务器设置 <small>配置服务器的设置。</small></h3>
                     </div>
                     <div class="box-body">
                         <div class="row">

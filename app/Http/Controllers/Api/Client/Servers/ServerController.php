@@ -11,7 +11,9 @@ use Pterodactyl\Transformers\Api\Client\ServerTransformer;
 use Pterodactyl\Services\Servers\GetUserPermissionsService;
 use Pterodactyl\Http\Controllers\Api\Client\ClientApiController;
 use Pterodactyl\Http\Requests\Api\Client\Servers\GetServerRequest;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Pterodactyl\Http\Requests\Api\Client\Servers\DeleteServerRequest;
+use Pterodactyl\Http\Requests\Api\Client\Servers\UpdateBackgroundRequest;
 
 class ServerController extends ClientApiController
 {
@@ -51,6 +53,18 @@ class ServerController extends ClientApiController
     }
 
     /**
+     * Updates the background image for a server.
+     */
+    public function updateBackground(UpdateBackgroundRequest $request, Server $server): JsonResponse
+    {
+        $server->update([
+            'bg' => $request->input('bg'),
+        ]);
+
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
+
+    /**
      * Deletes the requested server via the API and
      * returns the resources to the authenticated user.
      *
@@ -64,10 +78,14 @@ class ServerController extends ClientApiController
             throw new DisplayException('您无权执行此操作。');
         };
 
+        if (!password_verify($request['password'], $request->user()->password)) {
+            throw new BadRequestHttpException('提供的密码不正确。');
+        }
+
         try {
             $this->deletionService->returnResources(true)->handle($server);
         } catch (DisplayException $ex) {
-            throw new DisplayException('Unable to delete the server from the system.');
+            throw new DisplayException('无法从系统中删除服务器实例。');
         }
 
         try {

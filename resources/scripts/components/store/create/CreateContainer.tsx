@@ -220,7 +220,8 @@ export default () => {
                             <Select name={'node'} onChange={(e) => setNode(parseInt(e.target.value))}>
                                 {nodes.map((n) => (
                                     <option key={n.id} value={n.id}>
-                                        {n.name} - {n.fqdn} | {n.used} / {n.free} 可用槽位
+                                        {n.name} - {n.fqdn} | {100 - parseInt(((n?.used / n?.total) * 100).toFixed(0))}%
+                                        剩余空间
                                     </option>
                                 ))}
                             </Select>
@@ -244,7 +245,9 @@ export default () => {
                                     </option>
                                 ))}
                             </Select>
-                            <p css={tw`mt-2 text-sm text-neutral-400`}>择你想在服务器上运行什么功能/游戏。</p>
+                            <p css={tw`mt-2 text-sm text-neutral-400`}>
+                                选择你想在服务器上运行什么功能/游戏。
+                            </p>
                         </TitledGreyBox>
                     </Container>
                     <InputSpinner visible={loading}>
