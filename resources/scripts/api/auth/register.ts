@@ -26,7 +26,7 @@ export default ({ username, email, password, recaptchaData }: RegisterData): Pro
             )
             .then((response) => {
                 if (!(response.data instanceof Object)) {
-                    return reject(new Error('Unable to register account. Please contact an administrator.'));
+                    return reject(new Error('无法注册账号。请联系管理员。'));
                 }
 
                 return resolve({
