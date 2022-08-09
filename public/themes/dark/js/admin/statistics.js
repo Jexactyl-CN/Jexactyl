@@ -34,7 +34,7 @@ const ramChart = new Chart($("#ram_chart"), {
 const serversChart = new Chart($("#servers_chart"), {
     type: "pie",
     data: {
-        labels: ["状态正常的服务器", "已被停用的服务器"],
+        labels: ["正常状态的服务器", "冻结状态的服务器"],
         datasets: [{
             backgroundColor: ["#189a1c", "hsl(211, 22%, 21%)"],
             data: [active, suspended]
@@ -45,7 +45,7 @@ const serversChart = new Chart($("#servers_chart"), {
 const statusChart = new Chart($("#status_chart"), {
     type: "pie",
     data: {
-        labels: ["正在运行的服务器", "处于离线的服务器"],
+        labels: ["正在运行的服务器", "未运行的服务器"],
         datasets: [{
             backgroundColor: ["#189a1c", "hsl(211, 22%, 21%)"],
             data: [0, 0]
