@@ -1,18 +1,16 @@
 import tw from 'twin.macro';
 import { breakpoint } from '@/theme';
 import * as Icon from 'react-feather';
-import { Link } from 'react-router-dom';
 import { useStoreState } from 'easy-peasy';
 import styled from 'styled-components/macro';
 import { megabytesToHuman } from '@/helpers';
 import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/elements/button/index';
-import PlusSquareSvg from '@/assets/images/plus_square.svg';
-import StoreError from '@/components/store/error/StoreError';
+import Spinner from '@/components/elements/Spinner';
+import { Button } from '@/components/elements/button';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
-import DivideSquareSvg from '@/assets/images/divide_square.svg';
 import { getResources, Resources } from '@/api/store/getResources';
 import PageContentBlock from '@/components/elements/PageContentBlock';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -42,12 +40,7 @@ const OverviewContainer = () => {
         getResources().then((resources) => setResources(resources));
     }, []);
 
-    const redirect = (url: string) => {
-        // @ts-expect-error this is valid
-        window.location = `/store/${url}`;
-    };
-
-    if (!resources) return <StoreError />;
+    if (!resources) return <Spinner size={'large'} centered />;
 
     return (
         <PageContentBlock title={'商店概览'}>
@@ -92,43 +85,15 @@ const OverviewContainer = () => {
                     </Wrapper>
                 </TitledGreyBox>
             </Container>
-            <Container css={tw`lg:grid lg:grid-cols-2 my-10`}>
-                <TitledGreyBox title={'创建服务器实例'} className={'j-right'}>
-                    <div css={tw`md:flex w-full p-6 md:pl-0 mx-1`}>
-                        <div css={tw`flex-none select-none mb-6 md:mb-0 self-center`}>
-                            <img src={PlusSquareSvg} css={tw`block w-32 md:w-48 mx-auto p-8`} />
-                        </div>
-                        <div css={tw`flex-1`}>
-                            <h2 css={tw`text-xl mb-2`}>创建服务器实例</h2>
-                            <p>
-                                使用您选择的资源、服务器类型等来创建您的服务器。
-                                随时删除或者编辑您的服务器以充分利用您的可用资源。
-                            </p>
-                            <Link to={'/store/create'}>
-                                <Button css={tw`mt-6 w-full`} size={Button.Sizes.Large}>
-                                    创建
-                                </Button>
-                            </Link>
-                        </div>
-                    </div>
-                </TitledGreyBox>
-                <TitledGreyBox title={'编辑服务器资源'} className={'j-left mt-8 sm:mt-0 sm:ml-8'}>
-                    <div css={tw`md:flex w-full p-6 md:pl-0 mx-1`}>
-                        <div css={tw`flex-none select-none mb-6 md:mb-0 self-center`}>
-                            <img src={DivideSquareSvg} css={tw`block w-32 md:w-48 mx-auto p-8`} />
-                        </div>
-                        <div css={tw`flex-1`}>
-                            <h2 css={tw`text-xl mb-2`}>编辑您的服务器资源</h2>
-                            <p>
-                                想要从您的服务器中添加或删除资源，或者完全删除它？使用编辑功能立即对您的服务器进行更改。
-                            </p>
-                            <Button css={tw`mt-6 w-full`} size={Button.Sizes.Large} onClick={() => redirect('edit')}>
-                                编辑
-                            </Button>
-                        </div>
-                    </div>
-                </TitledGreyBox>
-            </Container>
+            <div className={'text-center mr-10'}>
+                <p className={'text-xl my-2 text-gray-400'}>您想要再创建一个服务器？</p>
+                <Link to={'/store/create'}>
+                    <Button className={'w-full lg:w-1/6'}>
+                        <Icon.PlusCircle className={'mr-1'} />
+                        创建
+                    </Button>
+                </Link>
+            </div>
         </PageContentBlock>
     );
 };

@@ -43,6 +43,7 @@ export default () => {
         clearFlashes('store:resources');
 
         purchaseResource(resource)
+            .then(() => setOpen(false))
             .then(() =>
                 addFlash({
                     type: 'success',
@@ -87,9 +88,7 @@ export default () => {
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
                         购买 CPU 以提高服务器性能。
                     </p>
-                    <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每 50% CPU 的成本: {cost.cpu} 积分
-                    </p>
+                    <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>每 50% CPU 的成本: {cost.cpu} 积分</p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买内存'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
                     <Wrapper>
@@ -152,9 +151,7 @@ export default () => {
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
                         购买服务器位以部署服务器实例。
                     </p>
-                    <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每个槽位的成本: {cost.slot} 积分
-                    </p>
+                    <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>每个槽位的成本: {cost.slot} 积分</p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器端口'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
                     <Wrapper>
@@ -173,9 +170,7 @@ export default () => {
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
                         购买端口以连接到您的服务器。
                     </p>
-                    <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        每个端口的成本: {cost.port} 积分
-                    </p>
+                    <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>每个端口的成本: {cost.port} 积分</p>
                 </TitledGreyBox>
                 <TitledGreyBox title={'购买服务器备份槽位'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
                     <Wrapper>

@@ -3,6 +3,7 @@ import { breakpoint } from '@/theme';
 import * as Icon from 'react-feather';
 import { Form, Formik } from 'formik';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import useFlash from '@/plugins/useFlash';
 import { useStoreState } from 'easy-peasy';
 import { number, object, string } from 'yup';
@@ -11,10 +12,10 @@ import Field from '@/components/elements/Field';
 import Select from '@/components/elements/Select';
 import { Egg, getEggs } from '@/api/store/getEggs';
 import createServer from '@/api/store/createServer';
+import Spinner from '@/components/elements/Spinner';
 import { getNodes, Node } from '@/api/store/getNodes';
 import { getNests, Nest } from '@/api/store/getNests';
 import { Button } from '@/components/elements/button/index';
-import StoreError from '@/components/store/error/StoreError';
 import InputSpinner from '@/components/elements/InputSpinner';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
@@ -113,7 +114,7 @@ export default () => {
             });
     };
 
-    if (!resources || !nests || !eggs || !nodes) return <StoreError />;
+    if (!resources || !nests || !eggs || !nodes) return <Spinner size={'large'} centered />;
 
     return (
         <PageContentBlock title={'创建服务器实例'} showFlashKey={'store:create'}>
@@ -155,8 +156,22 @@ export default () => {
                 })}
             >
                 <Form>
+                    <div className={'mb-10'}>
+                        <Link to={'/store'}>
+                            <Button.Text className={'w-full lg:w-1/6 m-2'}>
+                                <Icon.ArrowLeft className={'mr-1'} />
+                                回到商店
+                            </Button.Text>
+                        </Link>
+                        <Link to={'/store/resources'}>
+                            <Button className={'w-full lg:w-1/6 m-2'}>
+                                <Icon.ShoppingCart className={'mr-2'} />
+                                购买资源
+                            </Button>
+                        </Link>
+                    </div>
                     <h1 className={'j-left text-5xl'}>基础信息</h1>
-                    <h3 className={'j-left text-2xl text-neutral-500'}>为新服务器设置基本信息。 </h3>
+                    <h3 className={'j-left text-2xl text-neutral-500'}>为新服务器设置基本信息。</h3>
                     <Container className={'lg:grid lg:grid-cols-2 my-10 gap-4'}>
                         <TitledGreyBox title={'服务器名称'} css={tw`mt-8 sm:mt-0`}>
                             <Field name={'name'} />
@@ -258,7 +273,7 @@ export default () => {
                                 size={Button.Sizes.Large}
                                 disabled={loading}
                             >
-                                创建 <Icon.ArrowRightCircle className={'ml-2'} />
+                                <Icon.Server className={'mr-2'} /> 创建
                             </Button>
                         </div>
                     </InputSpinner>

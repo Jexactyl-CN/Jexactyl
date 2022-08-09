@@ -74,13 +74,12 @@ class ServerController extends ClientApiController
     {
         $user = $request->user();
 
-        if ($user->id != $server->owner_id) {
+        if ($user->id != $server->owner_id ||
+            $request['name'] != $server->name ||
+            !password_verify($request['password'], $request->user()->password)
+        ) {
             throw new DisplayException('您无权执行此操作。');
         };
-
-        if (!password_verify($request['password'], $request->user()->password)) {
-            throw new BadRequestHttpException('提供的密码不正确。');
-        }
 
         try {
             $this->deletionService->returnResources(true)->handle($server);
