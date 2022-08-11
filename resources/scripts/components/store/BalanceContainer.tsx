@@ -63,7 +63,7 @@ export default () => {
                         查看每分钟挂机将获得多少积分。
                     </h3>
                     <Container className={'j-up lg:grid lg:grid-cols-2 my-10'}>
-                        <ContentBox title={'Earn Rate'} showFlashes={'earn:rate'} css={tw`sm:mt-0`}>
+                        <ContentBox title={'赚取率'} showFlashes={'earn:rate'} css={tw`sm:mt-0`}>
                             <h1 css={tw`text-7xl flex justify-center items-center`}>
                                 {earn.amount} <span className={'text-base ml-4'}>积分 / 分钟</span>
                             </h1>
