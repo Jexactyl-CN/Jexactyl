@@ -122,7 +122,6 @@ export default () => {
         );
     }
 
-    if (!nodes) {
     return (
         <PageContentBlock title={'创建服务器'} showFlashKey={'store:create'}>
             <Formik
