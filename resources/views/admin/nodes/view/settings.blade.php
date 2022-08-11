@@ -211,6 +211,32 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">部署</h3>
+                </div>
+                <div class="box-body row">
+                    <div class="form-group col-xs-12">
+                        <label for="deployable" class="control-label">适用于商店部署</label>
+                        <div>
+                            <div class="radio radio-success radio-inline">
+                                <input type="radio" id="pDeployableTrue" value="1" name="deployable" {{ (old('deployable', $node->deployable)) ? 'checked' : '' }}>
+                                <label for="pDeployableTrue"> 允许</label>
+                            </div>
+                            <div class="radio radio-danger radio-inline">
+                                <input type="radio" id="pDeployableFalse" value="0" name="deployable" {{ (old('deployable', $node->deployable)) ? '' : 'checked' }}>
+                                <label for="pDeployableFalse"> 不允许</label>
+                            </div>
+                        </div>
+                        <p class="text-muted"><small>
+                            此选项允许您通过 Jexactyl 商店的"服务器创建"页面来控制此节点是否可见.
+                            如果设置为禁用，用户将无法在此节点上进行部署。
+                        </small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">

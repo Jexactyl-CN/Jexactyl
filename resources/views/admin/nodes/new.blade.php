@@ -61,7 +61,24 @@
                         <p class="text-muted small">将节点设为 <code>私人</code> 将无法使用节点自动部署的功能.
                     </div>
                     <div class="form-group">
-                        <label for="pFQDN" class="form-label">域名</label>
+                        <label class="form-label">可通过 Jexactyl 商店部署</label>
+                        <div>
+                            <div class="radio radio-success radio-inline">
+                                <input type="radio" id="pDeployableTrue" value="1" name="deployable" checked>
+                                <label for="pDeployableTrue"> 允许 </label>
+                            </div>
+                            <div class="radio radio-danger radio-inline">
+                                <input type="radio" id="pDeployableFalse" value="0" name="deployable">
+                                <label for="pDeployableFalse"> 不允许 </label>
+                            </div>
+                        </div>
+                        <p class="text-muted"><small>
+                            此选项允许您通过 Jexactyl 商店的"服务器创建"页面来控制此节点是否可见.
+                            如果设置为禁用，用户将无法在此节点上进行部署。
+                        </small></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="pFQDN" class="form-label">域名(FQDN)</label>
                         <input type="text" name="fqdn" id="pFQDN" class="form-control" value="{{ old('fqdn') }}"/>
                         <p class="text-muted small">请输入节点服务器域名 (例如 <code>node.example.com</code>) 用来连接至节点服务器主机. IP 地址 <em>仅能</em> 在不使用SSL连接的情况下填写使用.</p>
                     </div>

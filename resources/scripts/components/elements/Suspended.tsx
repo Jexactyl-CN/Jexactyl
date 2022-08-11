@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
-import PageContentBlock from '@/components/elements/PageContentBlock';
 import tw from 'twin.macro';
-import ServerErrorSvg from '@/assets/images/server_error.svg';
-import { Button } from '@/components/elements/button';
-import renewServer from '@/api/server/renewServer';
-import { ServerContext } from '@/state/server';
+import React, { useState } from 'react';
 import useFlash from '@/plugins/useFlash';
-import FlashMessageRender from '@/components/FlashMessageRender';
-import deleteServer from '@/api/server/deleteServer';
-import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { useStoreState } from '@/state/hooks';
+import Code from '@/components/elements/Code';
+import { ServerContext } from '@/state/server';
+import Input from '@/components/elements/Input';
+import renewServer from '@/api/server/renewServer';
+import deleteServer from '@/api/server/deleteServer';
+import { Button } from '@/components/elements/button';
 import { Dialog } from '@/components/elements/dialog';
-
-type ModalType = 'renew' | 'delete';
+import ServerErrorSvg from '@/assets/images/server_error.svg';
+import FlashMessageRender from '@/components/FlashMessageRender';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
+import PageContentBlock from '@/components/elements/PageContentBlock';
 
 export default () => {
-    const { clearFlashes, clearAndAddHttpError } = useFlash();
-    const renewable = ServerContext.useStoreState((state) => state.server.data?.renewable);
-    const store = useStoreState((state) => state.storefront.data!);
-    const [isSubmit, setSubmit] = useState(false);
-    const [open, setOpen] = useState<ModalType | null>(null);
+    const [name, setName] = useState('');
+    const [password, setPassword] = useState('');
 
+    const [isSubmit, setSubmit] = useState(false);
+    const [renewDialog, setRenewDialog] = useState(false);
+    const [deleteDialog, setDeleteDialog] = useState(false);
+    const [confirmDialog, setConfirmDialog] = useState(false);
+
+    const { clearFlashes, clearAndAddHttpError } = useFlash();
+    const store = useStoreState((state) => state.storefront.data!);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
+    const serverName = ServerContext.useStoreState((state) => state.server.data!.name);
+    const renewable = ServerContext.useStoreState((state) => state.server.data?.renewable);
 
     const doRenewal = () => {
         clearFlashes('server:renewal');
@@ -39,11 +45,14 @@ export default () => {
             });
     };
 
-    const doDeletion = () => {
+    const doDeletion = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         clearFlashes('server:renewal');
         setSubmit(true);
 
-        deleteServer(uuid)
+        deleteServer(uuid, name, password)
             .then(() => {
                 setSubmit(false);
                 // @ts-expect-error this is valid
@@ -55,36 +64,55 @@ export default () => {
             });
     };
 
-    const RenewDialog = () => (
-        <Dialog.Confirm
-            open={open === 'renew'}
-            onClose={() => setOpen(null)}
-            title={'确认续费服务器'}
-            confirm={'继续'}
-            onConfirmed={() => doRenewal()}
-        >
-            <SpinnerOverlay visible={isSubmit} />
-            您确定要花费 {store.renewals.cost} {store.currency} 来续费您的服务器实例吗？
-        </Dialog.Confirm>
-    );
-
-    const DeleteDialog = () => (
-        <Dialog.Confirm
-            open={open === 'delete'}
-            onClose={() => setOpen(null)}
-            title={'确认删除服务器'}
-            confirm={'继续'}
-            onConfirmed={() => doDeletion()}
-        >
-            <SpinnerOverlay visible={isSubmit} />
-            此操作会将您的服务器实例以及所有文件和配置从系统中删除。
-        </Dialog.Confirm>
-    );
-
     return (
         <>
-            {open && open === 'renew' ? <RenewDialog /> : <DeleteDialog />}
-            <PageContentBlock title={'服务器实例已停用'}>
+            <Dialog.Confirm
+                open={renewDialog}
+                onClose={() => setRenewDialog(false)}
+                title={'确认续费服务器'}
+                confirm={'继续'}
+                onConfirmed={() => doRenewal()}
+            >
+                <SpinnerOverlay visible={isSubmit} />
+                您确定要花费 {store.renewals.cost} {store.currency} 来续费您的服务器实例吗？
+            </Dialog.Confirm>
+            <Dialog.Confirm
+                open={deleteDialog}
+                onClose={() => setDeleteDialog(false)}
+                title={'确认删除服务器'}
+                confirm={'继续'}
+                onConfirmed={() => setConfirmDialog(true)}
+            >
+                <SpinnerOverlay visible={isSubmit} />
+                此操作会将您的服务器实例以及所有文件和配置从系统中删除。
+            </Dialog.Confirm>
+            <form id={'delete-suspended-server-form'} onSubmit={doDeletion}>
+                <Dialog
+                    open={confirmDialog}
+                    title={'服务器实例已停用'}
+                    onClose={() => setConfirmDialog(false)}
+                >
+                    {name !== serverName && (
+                        <>
+                            <p className={'my-2 text-gray-400'}>
+                                在下面输入 <Code>{serverName}</Code>。
+                            </p>
+                            <Input type={'text'} value={name} onChange={(n) => setName(n.target.value)} />
+                        </>
+                    )}
+                    <p className={'my-2 text-gray-400'}>输入密码以继续删除服务器。</p>
+                    <Input type={'password'} value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <Button
+                        disabled={!password.length}
+                        type={'submit'}
+                        className={'mt-2'}
+                        form={'delete-suspended-server-form'}
+                    >
+                        确认
+                    </Button>
+                </Dialog>
+            </form>
+            <PageContentBlock title={'Server Suspended'}>
                 <FlashMessageRender byKey={'server:renewal'} css={tw`mb-1`} />
                 <div css={tw`flex justify-center`}>
                     <div
@@ -97,12 +125,16 @@ export default () => {
                                 <p css={tw`text-sm my-2`}>
                                     您的服务器因未按时更新而被暂停。&apos;续订&apos; 按钮以重新激活您的服务器实例。如果您想删除服务器实例，则资源将自动退回您的帐户中，以便您的下次重新部署新的服务器实例。
                                 </p>
-                                <Button className={'mx-2 my-1'} onClick={() => setOpen('renew')} disabled={isSubmit}>
+                                <Button
+                                    className={'mx-2 my-1'}
+                                    onClick={() => setRenewDialog(true)}
+                                    disabled={isSubmit}
+                                >
                                     立即续订
                                 </Button>
                                 <Button.Danger
                                     className={'mx-2 my-1'}
-                                    onClick={() => setOpen('delete')}
+                                    onClick={() => setDeleteDialog(true)}
                                     disabled={isSubmit}
                                 >
                                     删除服务器

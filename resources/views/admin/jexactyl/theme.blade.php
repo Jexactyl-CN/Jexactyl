@@ -36,7 +36,9 @@
                                     <select name="theme:admin" class="form-control">
                                         <option @if ($admin == 'jexactyl') selected @endif value="jexactyl">默认主题</option>
                                         <option @if ($admin == 'dark') selected @endif value="dark">深色主题</option>
-                                        <option @if ($admin == 'purple') selected @endif value="purple">亮色主题</option>
+                                        <option @if ($admin == 'light') selected @endif value="light">亮色主题</option>
+                                        <option @if ($admin == 'blue') selected @endif value="blue">蓝色主题</option>
+                                        <option @if ($admin == 'minecraft') selected @endif value="minecraft">Minecraft&#8482; 主题</option>
                                     </select>
                                     <p class="text-muted"><small>确定 Jexactyl 的 UI 的主题。</small></p>
                                 </div>

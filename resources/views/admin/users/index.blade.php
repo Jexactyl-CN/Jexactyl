@@ -45,8 +45,9 @@
                             <th>姓名</th>
                             <th>用户名</th>
                             <th class="text-center">动态口令认证</th>
-                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="Servers that this user is marked as the owner of.">拥有的服务器实例</span></th>
-                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="Servers that this user can access because they are marked as a subuser.">作为子用户拥有的服务器实例</span></th>
+                            <th class="text-center">审批</th>
+                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="此用户作为所有者的服务器实例。">拥有的服务器实例</span></th>
+                            <th class="text-center"><span data-toggle="tooltip" data-placement="top" title="此用户作为子用户可以访问的服务器实例。">可访问</span></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -62,6 +63,13 @@
                                         <i class="fa fa-lock text-green"></i>
                                     @else
                                         <i class="fa fa-unlock text-red"></i>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($user->approved)
+                                        <i class="fa fa-check text-green"></i>
+                                    @else
+                                        <i class="fa fa-times text-red"></i>
                                     @endif
                                 </td>
                                 <td class="text-center">

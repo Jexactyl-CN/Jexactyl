@@ -24,9 +24,8 @@ class ServerController extends ClientApiController
     /**
      * ServerController constructor.
      */
-    public function __construct(
-        StoreCreationService $creationService
-    ) {
+    public function __construct(StoreCreationService $creationService)
+    {
         parent::__construct();
 
         $this->creationService = $creationService;
@@ -34,7 +33,9 @@ class ServerController extends ClientApiController
 
     public function nodes(GetStoreNodesRequest $request): array
     {
-        return $this->fractal->collection(Node::all())
+        $nodes = Node::where('deployable', true)->get();
+
+        return $this->fractal->collection($nodes)
             ->transformWith($this->getTransformer(NodeTransformer::class))
             ->toArray();
     }

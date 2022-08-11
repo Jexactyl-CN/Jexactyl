@@ -4,7 +4,7 @@ namespace Pterodactyl\Http\Requests\Admin\Jexactyl;
 
 use Pterodactyl\Http\Requests\Admin\AdminFormRequest;
 
-class ThemeFormRequest extends AdminFormRequest
+class ApprovalFormRequest extends AdminFormRequest
 {
     /**
      * @return array
@@ -12,7 +12,7 @@ class ThemeFormRequest extends AdminFormRequest
     public function rules()
     {
         return [
-            'theme:admin' => 'required|string|in:jexactyl,dark,light,blue,minecraft',
+            'enabled' => 'required|in:true,false',
         ];
     }
 }
