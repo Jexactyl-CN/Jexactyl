@@ -21,8 +21,8 @@ const IndexRouter = () => {
     if (approvals && !approved && authenticated) {
         return (
             <NotApproved
-                title={'Awaiting Approval'}
-                message={'Your account is currently pending approval from an administator.'}
+                title={'正在等待审批'}
+                message={'您的帐户目前正在等待管理员的审批。'}
             />
         );
     }
