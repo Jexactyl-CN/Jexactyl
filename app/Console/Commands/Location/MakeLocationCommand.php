@@ -23,13 +23,13 @@ class MakeLocationCommand extends Command
      * @var string
      */
     protected $signature = 'p:location:make
-                            {--short= : 此节点服务器组的标识码名称（例如 us1）。}
-                            {--long= : 此节点服务器组的描述。}';
+                            {--short= : 此地域的标识码名称（例如 us1）。}
+                            {--long= : 此地域的描述。}';
 
     /**
      * @var string
      */
-    protected $description = '通过 CLI 在系统上创建一个新节点服务器组。';
+    protected $description = '通过 CLI 在系统上创建一个新地域。';
 
     /**
      * Create a new command instance.

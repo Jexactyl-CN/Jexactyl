@@ -67,8 +67,8 @@ export default () => {
             initialValues={{ email: '' }}
             validationSchema={object().shape({
                 email: string()
-                    .email('必须提供有效的电子邮件地址才能继续。')
-                    .required('必须提供有效的电子邮件地址才能继续。'),
+                    .email('必须提供有效的电子邮箱地址才能继续。')
+                    .required('必须提供有效的电子邮箱地址才能继续。'),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
@@ -77,7 +77,7 @@ export default () => {
                         light
                         label={'邮箱地址'}
                         description={
-                            '输入您的帐户电子邮件地址以接收有关重置密码的说明。'
+                            '输入您的帐户电子邮箱地址以接收有关重置密码的说明。'
                         }
                         name={'email'}
                         type={'email'}

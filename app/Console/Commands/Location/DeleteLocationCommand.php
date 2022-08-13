@@ -38,7 +38,7 @@ class DeleteLocationCommand extends Command
     /**
      * @var string
      */
-    protected $signature = 'p:location:delete {--short= : 要删除的节点服务器组的标识码。}';
+    protected $signature = 'p:location:delete {--short= : 要删除的地域的标识码。}';
 
     /**
      * DeleteLocationCommand constructor.

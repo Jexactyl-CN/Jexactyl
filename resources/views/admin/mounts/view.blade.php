@@ -8,14 +8,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    存储挂载 &rarr; 概览 &rarr; {{ $mount->id }}
+    挂载 &rarr; 概览 &rarr; {{ $mount->id }}
 @endsection
 
 @section('content-header')
     <h1>{{ $mount->name }}<small>{{ str_limit($mount->description, 75) }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.mounts') }}">存储挂载</a></li>
+        <li><a href="{{ route('admin.mounts') }}">挂载</a></li>
         <li class="active">{{ $mount->name }}</li>
     </ol>
 @endsection

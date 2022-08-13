@@ -55,7 +55,7 @@ class AppSettingsCommand extends Command
      */
     protected $signature = 'p:environment:setup
                             {--new-salt : 是否为 HashIDs 生成新 Salt,若生成新 Salt 当前用户所有密码验证都会失效，需要重设密码.}
-                            {--author= : 在此实例上创建的服务应链接到的电子邮件.}
+                            {--author= : 在此实例上创建的服务应链接到的电子邮箱.}
                             {--url= : 运行此面板的 URL 例如 https://pterodactyl.cn}
                             {--timezone= : 用于面板时间的时区 北京时区为 Asia/Shanghai.}
                             {--cache= : 要使用的缓存驱动程序后端 不懂就用默认值.}
@@ -92,7 +92,7 @@ class AppSettingsCommand extends Command
             $this->variables['HASHIDS_SALT'] = str_random(20);
         }
 
-        $this->output->comment('提供预设导出中作者使用的电子邮件地址.');
+        $this->output->comment('提供预设导出中作者使用的电子邮箱地址.');
         $this->variables['APP_SERVICE_AUTHOR'] = $this->option('author') ?? $this->ask(
             '预设作者邮箱',
             config('pterodactyl.service.author', 'unknown@unknown.com')
@@ -104,7 +104,7 @@ class AppSettingsCommand extends Command
             return 1;
         }
 
-        $this->output->comment('面板 URL 取决于是否使用 SSL 安全连接必须以 https:// 或 http:// 开头. 如果此处填写错误，您的电子邮件和其他内容将被链接到错误的地址.');
+        $this->output->comment('面板 URL 取决于是否使用 SSL 安全连接必须以 https:// 或 http:// 开头. 如果此处填写错误，您的电子邮箱和其他内容将被链接到错误的地址.');
         $this->variables['APP_URL'] = $this->option('url') ?? $this->ask(
             '面板应用 URL',
             config('app.url', 'http://example.org')

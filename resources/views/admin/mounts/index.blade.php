@@ -8,14 +8,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    存储挂载
+    挂载
 @endsection
 
 @section('content-header')
-    <h1>存储挂载<small>配置和管理服务器的附加挂载点。</small></h1>
+    <h1>挂载<small>配置和管理服务器的附加挂载点。</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li class="active">存储挂载</li>
+        <li class="active">挂载</li>
     </ol>
 @endsection
 

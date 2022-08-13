@@ -178,7 +178,7 @@ export default () => {
                                 <Can action={'startup.*'}>
                                     <NavLink to={`${match.url}/startup`}>
                                         <div css={tw`flex items-center justify-between`}>
-                                            启动设置 <Icon.Play css={tw`ml-1`} size={18} />
+                                            启动 <Icon.Play css={tw`ml-1`} size={18} />
                                         </div>
                                     </NavLink>
                                 </Can>

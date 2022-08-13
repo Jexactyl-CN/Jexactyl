@@ -52,7 +52,7 @@ return [
         'chain_interval_too_long' => '链式任务的最大间隔时间是 15 分钟。',
     ],
     'locations' => [
-        'has_nodes' => '无法删除关联了节点服务器的节点服务器组。',
+        'has_nodes' => '无法删除关联了节点服务器的地域。',
     ],
     'users' => [
         'node_revocation_failed' => '无法撤销 <a href=":link">节点 #:node</a> 上的密钥。:error',

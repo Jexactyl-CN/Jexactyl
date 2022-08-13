@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-12">
-                        <label for="name" class="control-label">节点服务器组</label>
+                        <label for="name" class="control-label">地域</label>
                         <div>
                             <select name="location_id" class="form-control">
                                 @foreach($locations as $location)

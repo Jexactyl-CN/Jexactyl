@@ -13,16 +13,16 @@
                         <a href="{{ route('admin.servers.view.details', $server->id) }}">详细信息</a>
                     </li>
                     <li class="{{ $router->currentRouteNamed('admin.servers.view.build') ? 'active' : '' }}">
-                        <a href="{{ route('admin.servers.view.build', $server->id) }}">构建设置</a>
+                        <a href="{{ route('admin.servers.view.build', $server->id) }}">构建配置</a>
                     </li>
                     <li class="{{ $router->currentRouteNamed('admin.servers.view.startup') ? 'active' : '' }}">
-                        <a href="{{ route('admin.servers.view.startup', $server->id) }}">启动设置</a>
+                        <a href="{{ route('admin.servers.view.startup', $server->id) }}">启动</a>
                     </li>
                     <li class="{{ $router->currentRouteNamed('admin.servers.view.database') ? 'active' : '' }}">
-                        <a href="{{ route('admin.servers.view.database', $server->id) }}">数据库设置</a>
+                        <a href="{{ route('admin.servers.view.database', $server->id) }}">数据库</a>
                     </li>
                     <li class="{{ $router->currentRouteNamed('admin.servers.view.mounts') ? 'active' : '' }}">
-                        <a href="{{ route('admin.servers.view.mounts', $server->id) }}">存储挂载设置</a>
+                        <a href="{{ route('admin.servers.view.mounts', $server->id) }}">挂载</a>
                     </li>
                 @endif
                 <li class="{{ $router->currentRouteNamed('admin.servers.view.manage') ? 'active' : '' }}">

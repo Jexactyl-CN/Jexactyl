@@ -29,7 +29,7 @@
                 </div>
                 <div class="box-body">
                     <div class="form-group">
-                        <label for="email" class="control-label">电子邮件地址</label>
+                        <label for="email" class="control-label">电子邮箱地址</label>
                         <div>
                             <input type="text" autocomplete="off" name="email" value="{{ old('email') }}" class="form-control" />
                         </div>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="box-body">
                     <div class="alert alert-info">
-                        <p>提供用户密码是可选的。新用户电子邮件提示用户在首次登录时创建密码。如果此处提供了密码，您将需要找到一种不同的方法将其提供给用户.</p>
+                        <p>提供用户密码是可选的。新用户电子邮箱提示用户在首次登录时创建密码。如果此处提供了密码，您将需要找到一种不同的方法将其提供给用户.</p>
                     </div>
                     <div id="gen_pass" class=" alert alert-success" style="display:none;margin-bottom: 10px;"></div>
                     <div class="form-group">

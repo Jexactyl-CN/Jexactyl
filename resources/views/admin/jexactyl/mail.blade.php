@@ -84,7 +84,7 @@
                                     <label class="control-label">邮件发件人</label>
                                     <div>
                                         <input required type="email" class="form-control" name="mail:from:address" value="{{ old('mail:from:address', config('mail.from.address')) }}" />
-                                        <p class="text-muted small">输入所有外发电子邮件都来自的电子邮件地址.</p>
+                                        <p class="text-muted small">输入所有外发电子邮箱都来自的电子邮件地址.</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">

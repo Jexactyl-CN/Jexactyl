@@ -11,10 +11,10 @@
 return [
     'location' => [
         'no_location_found' => '找不到与提供的标识码匹配的记录。',
-        'ask_short' => '节点服务器组标识码',
-        'ask_long' => '节点服务器组描述',
-        'created' => '已成功创建 ID 为 :id 的新节点服务器组 (:name)。',
-        'deleted' => '已成功删除请求的节点服务器组。',
+        'ask_short' => '地域标识码',
+        'ask_long' => '地域描述',
+        'created' => '已成功创建 ID 为 :id 的新地域 (:name)。',
+        'deleted' => '已成功删除请求的地域。',
     ],
     'user' => [
         'search_users' => '输入用户名、用户 ID 或电子邮箱地址',

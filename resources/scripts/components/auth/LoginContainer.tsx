@@ -72,7 +72,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             onSubmit={onSubmit}
             initialValues={{ username: '', password: '' }}
             validationSchema={object().shape({
-                username: string().required('必须提供用户名或电子邮件。'),
+                username: string().required('必须提供用户名或电子邮箱。'),
                 password: string().required('请输入您的帐户密码。'),
             })}
         >

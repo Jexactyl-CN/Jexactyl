@@ -45,7 +45,7 @@
                         <select name="owner_id" class="form-control" id="pUserId">
                             <option value="{{ $server->owner_id }}" selected>{{ $server->user->email }}</option>
                         </select>
-                        <p class="text-muted small">您可以通过将此字段更改为与此系统上的其他用途匹配的电子邮件来更改此服务器的所有者。如果您这样做，将自动生成一个新的守护程序安全令牌。</p>
+                        <p class="text-muted small">您可以通过将此字段更改为与此系统上的其他用途匹配的电子邮箱来更改此服务器的所有者。如果您这样做，将自动生成一个新的守护程序安全令牌。</p>
                     </div>
                     <div class="form-group">
                         <label for="description" class="control-label">服务器描述</label>

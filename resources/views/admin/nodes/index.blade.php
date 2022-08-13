@@ -47,7 +47,7 @@
                         <tr>
                             <th></th>
                             <th>名称</th>
-                            <th>节点服务器组</th>
+                            <th>地域</th>
                             <th>内存容量</th>
                             <th>存储容量</th>
                             <th class="text-center">服务器实例</th>

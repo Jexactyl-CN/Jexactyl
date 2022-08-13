@@ -7,7 +7,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例 — {{ $server->name }}: 构建设置
+    服务器实例 — {{ $server->name }}: 构建配置
 @endsection
 
 @section('content-header')
@@ -16,7 +16,7 @@
         <li><a href="{{ route('admin.index') }}">管理</a></li>
         <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
-        <li class="active">构建设置</li>
+        <li class="active">构建配置</li>
     </ol>
 @endsection
 
@@ -173,7 +173,7 @@
                         </div>
                         <div class="box-footer">
                             {!! csrf_field() !!}
-                            <button type="submit" class="btn btn-primary pull-right">更新构建设置</button>
+                            <button type="submit" class="btn btn-primary pull-right">更新构建配置</button>
                         </div>
                     </div>
                 </div>
