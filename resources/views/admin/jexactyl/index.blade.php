@@ -44,37 +44,6 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <i class="fa fa-bar-chart"></i> <h3 class="box-title">资源利用率 <small>总资源使用量一览图。</small></h3>
-                </div>
-                <div class="box-body">
-                    <div class="col-xs-12 col-md-3">
-                        <canvas id="servers_chart" width="100%" height="50">
-                            <p class="text-muted">此图表无可用数据。</p>
-                        </canvas>
-                    </div>
-                    <div class="col-xs-12 col-md-3" style="margin-bottom: 20px;">
-                        <canvas id="status_chart" width="100%" height="50">
-                            <p class="text-muted">此图表无可用数据。</p>
-                        </canvas>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <canvas id="ram_chart" width="100%" height="50">
-                            <p class="text-muted">此图表无可用数据。</p>
-                        </canvas>
-                    </div>
-                    <div class="col-xs-12 col-md-3">
-                        <canvas id="disk_chart" width="100%" height="50">
-                            <p class="text-muted">此图表无可用数据。</p>
-                        </canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
             <div class="col-xs-12 col-md-3">
                 <div class="info-box">
                     <span class="info-box-icon"><i class="fa fa-server"></i></span>
@@ -108,6 +77,32 @@
                     <div class="info-box-content" style="padding: 23px 10px 0;">
                         <span class="info-box-text">总存储空间使用量</span>
                         <span class="info-box-number">{{ $used['disk'] }} MB / {{ $available['disk'] }} MB </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <i class="fa fa-bar-chart"></i> <h3 class="box-title">资源利用率 <small>总资源使用量一览图。</small></h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-xs-12 col-md-4">
+                        <canvas id="servers_chart" width="100%" height="50">
+                            <p class="text-muted">此图表无可用数据。</p>
+                        </canvas>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <canvas id="ram_chart" width="100%" height="50">
+                            <p class="text-muted">此图表无可用数据。</p>
+                        </canvas>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <canvas id="disk_chart" width="100%" height="50">
+                            <p class="text-muted">此图表无可用数据。</p>
+                        </canvas>
                     </div>
                 </div>
             </div>
