@@ -1,7 +1,6 @@
-[![Logo Image](https://cdn.discordapp.com/attachments/696713493168259106/935167710399201320/Jexactyl_textured.png)](https://jexactyl.com)
+[![Logo Image](https://cdn.discordapp.com/attachments/1012411945141424218/1012430446556090468/JexactylBannerBasic.jpg)](https://jexactyl.com)
 
-![Tests](https://img.shields.io/github/workflow/status/Jexactyl-CN/Jexactyl/Build%20Panel?style=for-the-badge)
-![Maintained](https://img.shields.io/maintenance/yes/2022?style=for-the-badge)
+![Tests](https://img.shields.io/github/workflow/status/jexactyl/jexactyl/Build%20Panel?style=for-the-badge)
 [![KOOK](https://img.shields.io/badge/dynamic/json?color=44cc11&label=KOOK&query=online_count&suffix=%20ONLINE&url=https%3A%2F%2Fwww.kookapp.cn%2Fapi%2Fguilds%2F3158748478503304%2Fwidget.json&style=for-the-badge&logo=googlechat)](https://kook.top/FRyhXY)
 ![Downloads - Total](https://img.shields.io/github/downloads/Jexactyl-CN/Jexactyl/total?style=for-the-badge)
 ![Downloads - Latest](https://img.shields.io/github/downloads/Jexactyl-CN/Jexactyl/latest/total?style=for-the-badge)
@@ -28,6 +27,7 @@ Built on [Pterodactyl](https://pterodactyl.io), this software is designed from t
 | [**SneakyHub**](https://sneakyhub.com/discord) | A SneakyNodes LTD project, Free 24/7 hosting for games, websites, discord bots and more. | [@SneakyHub](https://github.com/sneakyhub) |
 | [**Wumpus Host**](https://wumpus.host) | A Discord bot host that offers free hosting, 24/7. | [@WumpusHost](https://github.com/wumpushost) |
 | [**GigaNodes**](https://client.giganodes.net) | A cheap host, with many locations like Europe, United States, Asia, United Kingdom | [@GigaNodes](https://discord.gg/dSgpmZ2C) |
+| [**CryptoHosting**](https://crypto-hosting.eu) | Crypto-Hosting offer high performance servers with extreme DDoS protection! | [@Crypto-Hosting](https://github.com/crypto-hosting) |
 
 ## Previews
 <p float="left">

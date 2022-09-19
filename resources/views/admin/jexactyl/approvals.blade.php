@@ -41,6 +41,11 @@
                                     <p class="text-muted"><small>确定用户是否必须由管理员批准才能使用面板。</small></p>
                                 </div>
                             </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label" for="webhook">Webhook URL</label>
+                                <input name="webhook" id="webhook" class="form-control" value="{{ $webhook }}">
+                                <p class="text-muted"><small>Provide the Discord Webhook URL to use when a user needs to be approved.</small></p>
+                            </div>
                         </div>
                     </div>
                     <div class="box box-footer">

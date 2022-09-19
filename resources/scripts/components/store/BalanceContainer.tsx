@@ -51,7 +51,7 @@ export default () => {
                 <ContentBox title={'购买积分'} showFlashes={'account:balance'} css={tw`mt-8 sm:mt-0 sm:ml-8`}>
                     {paypal && <PaypalPurchaseForm />}
                     {stripe && <StripePurchaseForm />}
-                    <p className={'text-gray-400 text-sm'}>
+                    <p className={'text-gray-400 text-sm m-2'}>
                         如果此处并未出现网关，那是因为尚未配置它们。
                     </p>
                 </ContentBox>

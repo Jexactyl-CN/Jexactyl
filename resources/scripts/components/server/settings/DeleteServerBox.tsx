@@ -11,7 +11,6 @@ import TitledGreyBox from '@/components/elements/TitledGreyBox';
 export default () => {
     const [name, setName] = useState('');
     const [warn, setWarn] = useState(false);
-    const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState(false);
 
     const { addFlash, clearFlashes, clearAndAddHttpError } = useFlash();
@@ -24,7 +23,7 @@ export default () => {
         e.stopPropagation();
         clearFlashes('settings');
 
-        deleteServer(uuid, name, password)
+        deleteServer(uuid, name)
             .then(() => {
                 setConfirm(false);
                 addFlash({
@@ -69,15 +68,18 @@ export default () => {
                             <Input type={'text'} value={name} onChange={(n) => setName(n.target.value)} />
                         </>
                     )}
-                    <p className={'my-2 text-gray-400'}>请输入密码以继续删除服务器。</p>
-                    <Input type={'password'} value={password} onChange={(e) => setPassword(e.currentTarget.value)} />
-                    <Button disabled={!password.length} type={'submit'} className={'mt-2'} form={'delete-server-form'}>
-                        Confirm
+                    <Button
+                        disabled={name !== serverName}
+                        type={'submit'}
+                        className={'mt-2'}
+                        form={'delete-server-form'}
+                    >
+                        是，删除服务器
                     </Button>
                 </Dialog>
             </form>
             <p className={'text-sm'}>
-                删除您的服务器将关闭所有服务器进程，将资源退回到您的帐户并删除所有与实例关联的文件、备份、数据库和设置。
+                删除您的服务器将关闭所有服务器进程，将资源退回到您的帐户并删除所有与实例关联的文件、备份、数据库和设置。{' '}
                 <strong className={'font-medium'}>
                     如果您继续执行此操作，所有数据将永久丢失。
                 </strong>

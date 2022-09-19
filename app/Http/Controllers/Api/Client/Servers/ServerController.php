@@ -57,9 +57,8 @@ class ServerController extends ClientApiController
      */
     public function updateBackground(UpdateBackgroundRequest $request, Server $server): JsonResponse
     {
-        $server->update([
-            'bg' => $request->input('bg'),
-        ]);
+        $url = $request->input('bg');
+        $server->update(['bg' => $url]);
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
@@ -74,11 +73,12 @@ class ServerController extends ClientApiController
     {
         $user = $request->user();
 
-        if ($user->id != $server->owner_id ||
-            $request['name'] != $server->name ||
-            !password_verify($request['password'], $request->user()->password)
-        ) {
+        if ($user->id != $server->owner_id ||$request['name'] != $server->name) {
             throw new DisplayException('您无权执行此操作。');
+        };
+
+        if ($this->settings->get('jexactyl::renewal:deletion') != 'true') {
+            throw new DisplayException('This feature has been locked by administrators.');
         };
 
         try {

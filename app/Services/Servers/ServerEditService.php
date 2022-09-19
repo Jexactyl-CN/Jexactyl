@@ -2,14 +2,23 @@
 
 namespace Pterodactyl\Services\Servers;
 
+use Pterodactyl\Models\User;
 use Illuminate\Http\Response;
 use Pterodactyl\Models\Server;
 use Illuminate\Http\JsonResponse;
 use Pterodactyl\Exceptions\DisplayException;
+use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Pterodactyl\Http\Requests\Api\Client\Servers\EditServerRequest;
 
 class ServerEditService
 {
+    private SettingsRepositoryInterface $settings;
+
+    public function __construct(SettingsRepositoryInterface $settings)
+    {
+        $this->settings = $settings;
+    }
+
     /**
      * Updates the requested instance with new limits.
      */
@@ -19,92 +28,19 @@ class ServerEditService
         $amount = $request->input('amount');
         $resource = $request->input('resource');
 
-        $this->verifyResources($request, $server);
+        if ($user->id != $server->owner_id) return;
+        $verify = $this->verify($request);
+        if (!$verify) return;
 
         $server->update([
             $resource => $this->getServerResource($request, $server) + $amount,
         ]);
 
         $user->update([
-            'store_'.$this->convertResource($request) => $this->getUserResource($request) - $amount,
+            'store_' . (string) $request->input('resource') => $this->toUser($request, $user) - $amount,
         ]);
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
-    }
-
-    /**
-     * @throws DisplayException
-     */
-    protected function convertResource(EditServerRequest $request)
-    {
-        switch ($request->input('resource')) {
-            case 'cpu':
-                return 'cpu';
-            case 'memory':
-                return 'memory';
-            case 'disk':
-                return 'disk';
-            case 'allocation_limit':
-                return 'ports';
-            case 'backup_limit':
-                return 'backups';
-            case 'database_limit':
-                return 'databases';
-            default:
-                throw new DisplayException('Unable to parse resource type.');
-        }
-    }
-
-    /**
-     * Get the requested resource type and transform it
-     * so it can be used in a database statement.
-     *
-     * @throws DisplayException
-     */
-    protected function getUserResource(EditServerRequest $request)
-    {
-        switch ($request->input('resource')) {
-            case 'cpu':
-                return $request->user()->store_cpu;
-            case 'memory':
-                return $request->user()->store_memory;
-            case 'disk':
-                return $request->user()->store_disk;
-            case 'allocation_limit':
-                return $request->user()->store_ports;
-            case 'backup_limit':
-                return $request->user()->store_backups;
-            case 'database_limit':
-                return $request->user()->store_databases;
-            default:
-                throw new DisplayException('Unable to parse resource type.');
-        }
-    }
-
-    /**
-     * Get the requested resource type and transform it
-     * so it can be used in a database statement.
-     *
-     * @throws DisplayException
-     */
-    protected function getServerResource(EditServerRequest $request, Server $server)
-    {
-        switch ($request->input('resource')) {
-            case 'cpu':
-                return $server->cpu;
-            case 'memory':
-                return $server->memory;
-            case 'disk':
-                return $server->disk;
-            case 'allocation_limit':
-                return $server->allocation_limit;
-            case 'backup_limit':
-                return $server->backup_limit;
-            case 'database_limit':
-                return $server->database_limit;
-            default:
-                throw new DisplayException('无法解析资源类型。');
-        }
     }
 
     /**
@@ -113,29 +49,77 @@ class ServerEditService
      *
      * @throws DisplayException
      */
-    protected function verifyResources(EditServerRequest $request, Server $server)
+    protected function verify(EditServerRequest $request, Server $server, User $user): bool
     {
-        $resource = $request->input('resource');
         $amount = $request->input('amount');
-        $user = $request->user();
+        $resource = $request->input('resource');
 
-        // Check that the server's limits are acceptable.
-        if ($resource == 'cpu' && $server->cpu <= 50 && $amount < 0) throw new DisplayException('分配给服务器的 CPU 不得低于 50%。');
-        if ($resource == 'memory' && $server->memory <= 1024 && $amount < 0) throw new DisplayException('分配给服务器的内存不能低于 1GB。');
-        if ($resource == 'disk' && $server->disk <= 1024 && $amount < 0) throw new DisplayException('分配给服务器的存储空间不能低于 1GB。');
+        foreach ($resource as $r) {
+          $limit = $this->settings->get('jexactyl::store:limit:' . $r);
 
-        if ($resource == 'allocation_limit' && $server->allocation_limit <= 1 && $amount < 0) throw new DisplayException('分配给服务器的网络分配不能少于 1 个。');
-        if ($resource == 'backup_limit' && $server->backup_limit <= 0 && $amount < 0) throw new DisplayException('分配给服务器的备份槽位不能少于 0 个。');
-        if ($resource == 'database_limit' && $server->database_limit <= 0 && $amount < 0) throw new DisplayException('分配给服务器的数据库槽位不能少于 0 个。');
+          // Check if the amount requested goes over defined limits.
+          if (($amount + $this->toServer($r, $server)) > $limit) return false;
+          // Verify baseline limits. We don't want servers with -4% CPU.
+          if ($this->toServer($r, $server) <= $this->toMin($r) && $amount < 0) return false;
+          // Verify that the user has the resource in their account.
+          if ($this->toUser($r, $user) < $amount) return false;
+        }
 
+        // Return true if all checked.
+        return true;
+    }
 
-        // Check whether the user has enough resource in their account.
-        if ($resource == 'cpu' && $user->store_cpu < $amount) throw new DisplayException('您没有足够的 CPU 来添加更多到您的服务器。');
-        if ($resource == 'memory' && $user->store_memory < $amount) throw new DisplayException('您没有足够的内存来添加更多到您的服务器实例。');
-        if ($resource == 'disk' && $user->store_disk < $amount) throw new DisplayException('您没有足够的存储空间来添加更多到您的服务器实例。');
+    /**
+     * Gets the minimum value for a specific resource.
+     *
+     * @throws DisplayException
+     */
+     protected function toMin(EditServerRequest $request): int
+     {
+         return match($request->input('resource')) {
+             'cpu' => 50,
+             'allocation_limit' => 1,
+             'disk', 'memory' => 1024,
+             'backup_limit', 'database_limit' => 0,
+             default => throw new DisplayException('Unable to parse resource type')
+         };
+     }
 
-        if ($resource == 'allocation_limit' && $user->store_ports < $amount) throw new DisplayException('您没有足够的端口来添加更多到您的服务器实例。');
-        if ($resource == 'backup_limit' && $user->store_backups < $amount) throw new DisplayException('您没有足够的备份来添加更多到您的服务器实例。');
-        if ($resource == 'database_limit' && $user->store_databases < $amount) throw new DisplayException('您没有足够的数据库来添加更多到您的服务器实例。');
+    /**
+     * Get the requested resource type and transform it
+     * so it can be used in a database statement.
+     *
+     * @throws DisplayException
+     */
+     protected function toUser(EditServerRequest $request, User $user): int
+     {
+         return match ($request->input('resource')) {
+             'cpu' => $user->store_cpu,
+             'disk' => $user->store_disk,
+             'memory' => $user->store_memory,
+             'backup_limit' => $user->store_backups,
+             'allocation_limit' => $user->store_ports,
+             'database_limit' => $user->store_databases,
+             default => throw new DisplayException('无法解析资源类型')
+         };
+     }
+
+    /**
+     * Get the requested resource type and transform it
+     * so it can be used in a database statement.
+     *
+     * @throws DisplayException
+     */
+    protected function toServer(EditServerRequest $request, Server $server): ?int
+    {
+        return match ($request->input('resource')) {
+            'cpu' => $server->cpu,
+            'disk' => $server->disk,
+            'memory' => $server->memory,
+            'backup_limit' => $server->backup_limit,
+            'database_limit' => $server->database_limit,
+            'allocation_limit' => $server->allocation_limit,
+            default => throw new DisplayException('无法解析资源类型')
+        };
     }
 }
