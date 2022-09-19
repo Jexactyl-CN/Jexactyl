@@ -44,7 +44,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label" for="webhook">Webhook URL</label>
                                 <input name="webhook" id="webhook" class="form-control" value="{{ $webhook }}">
-                                <p class="text-muted"><small>Provide the Discord Webhook URL to use when a user needs to be approved.</small></p>
+                                <p class="text-muted"><small>提供在需要审批用户时使用的 Discord Webhook URL。</small></p>
                             </div>
                         </div>
                     </div>

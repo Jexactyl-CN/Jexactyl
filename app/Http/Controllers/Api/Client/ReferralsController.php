@@ -26,7 +26,7 @@ class ReferralsController extends ClientApiController
 
     /**
      * Use a referral code.
-     * 
+     *
      * @throws DisplayException
      */
     public function use(ClientApiRequest $request): JsonResponse
@@ -35,7 +35,7 @@ class ReferralsController extends ClientApiController
         $code = $request->input('code');
 
         if ($request->user()->referral_code) {
-            throw new DisplayException('You have already used a referral code.');
+            throw new DisplayException('您已使用了推广码。');
         };
 
         // Get the user who owns the referral code.
@@ -46,7 +46,7 @@ class ReferralsController extends ClientApiController
         $referrer = User::where('id', $id->user_id)->first();
 
         if ($id->user_id == $request->user()->id) {
-            throw new DisplayException('You can\'t use your own referral code.');
+            throw new DisplayException('您不能使用自己的推广码。');
         };
 
         // Update the user with the code and give them the reward.
@@ -66,13 +66,13 @@ class ReferralsController extends ClientApiController
 
     /**
      * Store a new referral code for a user's account.
-     * 
+     *
      * @throws DisplayException
      */
     public function store(ClientApiRequest $request): array
     {
         if ($request->user()->referralCodes->count() >= 3) {
-            throw new DisplayException('You cannot have more than 3 referral codes.');
+            throw new DisplayException('您不能拥有超过 3 个推广码。');
         }
 
         $code = $request->user()->referralCodes()->create([
@@ -94,7 +94,7 @@ class ReferralsController extends ClientApiController
         $referralCode = $request->user()->referralCodes()
             ->where('code', $code)
             ->firstOrFail();
-    
+
         $referralCode->delete();
 
         return new JsonResponse([], JsonResponse::HTTP_NO_CONTENT);

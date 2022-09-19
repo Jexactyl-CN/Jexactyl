@@ -76,27 +76,27 @@ class UserCreationService
         }
 
         if ($this->settings->get('jexactyl::approvals:enabled') === 'true' && $this->settings->get('jexactyl::approvals:webhook')) {
-            $name = $this->settings->get('settings::app:name', 'Jexactyl');
-            $icon = $this->settings->get('settings::app:logo', 'https://avatars.githubusercontent.com/u/91636558');
+            $name = $this->settings->get('settings::app:name', 'Jexactyl-CN');
+            $icon = $this->settings->get('settings::app:logo', 'https://avatars.githubusercontent.com/u/109322690');
             $webhook_data = [
                 'username' => $name,
                 'avatar_url' => $icon,
                 'embeds' => [
                     [
-                        'title' => $name . ' - Registration Request',
+                        'title' => $name . ' - 注册请求',
                         'color' => 2718223,
-                        'description' => 'A new account has been created.',
+                        'description' => '已创建一个新帐户。',
                         'fields' => [
                             [
-                                'name' => 'Username:',
+                                'name' => '用户名:',
                                 'value' => $data['username'],
                             ],
                             [
-                                'name' => 'Email:',
+                                'name' => '邮箱:',
                                 'value' => $data['email'],
                             ],
                             [
-                                'name' => 'Approve:',
+                                'name' => '审批:',
                                 'value' => env('APP_URL') . '/admin/approvals',
                             ],
                         ],

@@ -91,13 +91,13 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label">Allow Server Deletion</label>
+                                <label class="control-label">允许删除服务器</label>
                                 <div>
                                     <select name="deletion" class="form-control">
-                                        <option @if ($deletion == 'false') selected @endif value="false">Disabled</option>
-                                        <option @if ($deletion == 'true') selected @endif value="true">Enabled</option>
+                                        <option @if ($deletion == 'false') selected @endif value="false">禁用</option>
+                                        <option @if ($deletion == 'true') selected @endif value="true">启用</option>
                                     </select>
-                                    <p class="text-muted"><small>Determines whether users are able to delete their own servers. (default: true)</small></p>
+                                    <p class="text-muted"><small>确定用户是否能够删除自己的服务器。（默认：true）</small></p>
                                 </div>
                             </div>
                         </div>
