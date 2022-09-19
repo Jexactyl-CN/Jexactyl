@@ -52,7 +52,7 @@
                                         <input type="text" id="default" name="default" class="form-control" value="{{ $default }}" />
                                         <span class="input-group-addon">天</span>
                                     </div>
-                                    <p class="text-muted"><small>设置服务器实例在其首次订阅到期之前的天数。</small></p>
+                                    <p class="text-muted"><small>设置服务器在其首次订阅到期之前的天数。</small></p>
                                 </div>
                             </div>
                             <div class="form-group col-md-4">

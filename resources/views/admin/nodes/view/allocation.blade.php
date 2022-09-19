@@ -14,7 +14,7 @@
     <h1>{{ $node->name }}<small>控制此节点上的服务器可用的资源分配.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.nodes') }}">节点服务器</a></li>
+        <li><a href="{{ route('admin.nodes') }}">节点</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
         <li class="active">资源分配</li>
     </ol>
@@ -26,10 +26,10 @@
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">关于</a></li>
-                <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">节点服务器设置</a></li>
+                <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">节点设置</a></li>
                 <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">守护进程设置</a></li>
                 <li class="active"><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">资源分配</a></li>
-                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">服务器实例</a></li>
+                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">服务器</a></li>
             </ul>
         </div>
     </div>

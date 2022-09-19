@@ -11,7 +11,7 @@
 @endsection
 
 @section('content-header')
-    <h1>地域<small>将节点服务器分组管理</small></h1>
+    <h1>地域<small>将节点分组管理</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
         <li class="active">地域</li>
@@ -35,8 +35,8 @@
                             <th>ID</th>
                             <th>标识码</th>
                             <th>描述</th>
-                            <th class="text-center">节点服务器</th>
-                            <th class="text-center">服务器实例</th>
+                            <th class="text-center">节点</th>
+                            <th class="text-center">服务器</th>
                         </tr>
                         @foreach ($locations as $location)
                             <tr>
@@ -66,7 +66,7 @@
                         <div class="col-md-12">
                             <label for="pShortModal" class="form-label">标识码</label>
                             <input type="text" name="short" id="pShortModal" class="form-control" />
-                            <p class="text-muted small">用于将此地域与其他节点服务器区分开来的简短标识符。必须介于 1 到 60 个字符之间, 例如, <code>us.nyc.lvl3</code>.</p>
+                            <p class="text-muted small">用于将此地域与其他节点区分开来的简短标识符。必须介于 1 到 60 个字符之间, 例如, <code>us.nyc.lvl3</code>.</p>
                         </div>
                         <div class="col-md-12">
                             <label for="pLongModal" class="form-label">描述</label>

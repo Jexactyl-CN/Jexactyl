@@ -48,7 +48,7 @@ export default () => {
                 <>
                     {schedules.length === 0 ? (
                         <p css={tw`text-sm text-center text-neutral-300`}>
-                            此服务器实例未创建计划。
+                            此服务器未创建计划。
                         </p>
                     ) : (
                         schedules.map((schedule) => (

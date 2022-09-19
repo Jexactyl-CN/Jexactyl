@@ -58,7 +58,7 @@ const BackupContainer = () => {
             </Pagination>
             {backupLimit === 0 && (
                 <p css={tw`text-center text-sm text-neutral-300`}>
-                    无法为此服务器创建备份，因为此服务器实例备份限制设置为0.
+                    无法为此服务器创建备份，因为此服务器备份限制设置为0.
                 </p>
             )}
             <Can action={'backup.create'}>

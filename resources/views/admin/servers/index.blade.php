@@ -7,14 +7,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例列表
+    服务器列表
 @endsection
 
 @section('content-header')
-    <h1>服务器实例列表<small>此系统上所有的可用服务器实例.</small></h1>
+    <h1>服务器列表<small>此系统上所有的可用服务器.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li class="active">服务器实例</li>
+        <li class="active">服务器</li>
     </ol>
 @endsection
 
@@ -23,7 +23,7 @@
     <div class="col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">服务器实例列表</h3>
+                <h3 class="box-title">服务器列表</h3>
                 <div class="box-tools search01">
                     <form action="{{ route('admin.servers') }}" method="GET">
                         <div class="input-group input-group-sm">
@@ -43,7 +43,7 @@
                             <th>名称</th>
                             <th>UUID</th>
                             <th>所有者</th>
-                            <th>所属节点服务器</th>
+                            <th>所属节点</th>
                             <th>连接地址</th>
                             <th></th>
                             <th></th>

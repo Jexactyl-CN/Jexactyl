@@ -7,14 +7,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例 — {{ $server->name }}: 删除
+    服务器 — {{ $server->name }}: 删除
 @endsection
 
 @section('content-header')
     <h1>{{ $server->name }}<small>将此服务器从面板上删除.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
+        <li><a href="{{ route('admin.servers') }}">服务器</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
         <li class="active">删除</li>
     </ol>
@@ -27,13 +27,13 @@
         <div class="col-md-6">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">安全删除服务器实例</h3>
+                    <h3 class="box-title">安全删除服务器</h3>
                 </div>
                 <div class="box-body">
-                    <p>此操作将尝试从面板和守护程序中删除服务器实例数据。</p>
+                    <p>此操作将尝试从面板和守护程序中删除服务器数据。</p>
                     <div class="checkbox checkbox-primary no-margin-bottom">
                         <input id="pReturnResourcesSafe" name="return_resources" type="checkbox" value="1" />
-                        <label for="pReturnResourcesSafe">在服务器实例删除时将资源返还给用户？</label>
+                        <label for="pReturnResourcesSafe">在服务器删除时将资源返还给用户？</label>
                     </div>
                 </div>
                 <div class="box-footer">
@@ -47,19 +47,19 @@
         <div class="col-md-6">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">强制删除服务器实例</h3>
+                    <h3 class="box-title">强制删除服务器</h3>
                 </div>
                 <div class="box-body">
                     <p>此操作将尝试从面板和守护程序中删除服务器。如果守护进程没有响应，或报告错误，删除操作将继续。</p>
                     <div class="checkbox checkbox-primary no-margin-bottom">
                         <input id="pReturnResources" name="return_resources" type="checkbox" value="1" />
-                        <label for="pReturnResources">在服务器实例删除时将资源返还给用户？</label>
+                        <label for="pReturnResources">在服务器删除时将资源返还给用户？</label>
                     </div>
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
                     <input type="hidden" name="force_delete" value="1" />
-                    <button id="forcedeletebtn"" class="btn btn-danger">强制删除服务器实例</button>
+                    <button id="forcedeletebtn"" class="btn btn-danger">强制删除服务器</button>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
     $('#deletebtn').click(function (event) {
         event.preventDefault();
         swal({
-            title: '删除服务器实例',
+            title: '删除服务器',
             text: '您确定要删除此服务器吗？ 没有回头路，所有数据将立即被删除。',
             showCancelButton: true,
             confirmButtonText: '删除',
@@ -87,7 +87,7 @@
     $('#forcedeletebtn').click(function (event) {
         event.preventDefault();
         swal({
-            title: '删除服务器实例',
+            title: '删除服务器',
             text: '您确定要删除此服务器吗？ 没有回头路，所有数据将立即被删除。',
             showCancelButton: true,
             confirmButtonText: '删除',

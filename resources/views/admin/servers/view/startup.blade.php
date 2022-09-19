@@ -7,14 +7,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例 — {{ $server->name }}: 启动
+    服务器 — {{ $server->name }}: 启动
 @endsection
 
 @section('content-header')
     <h1>{{ $server->name }}<small>管理启动命令与其变量.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
+        <li><a href="{{ route('admin.servers') }}">服务器</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
         <li class="active">启动</li>
     </ol>
@@ -32,7 +32,7 @@
                 <div class="box-body">
                     <label for="pStartup" class="form-label">启动命令</label>
                     <input id="pStartup" name="startup" class="form-control" type="text" value="{{ old('startup', $server->startup) }}" />
-                    <p class="small text-muted">于此编辑服务器实例的启动命令. 默认可用的变量有: <code>@{{SERVER_MEMORY}}</code>, <code>@{{SERVER_IP}}</code>, 和 <code>@{{SERVER_PORT}}</code>.</p>
+                    <p class="small text-muted">于此编辑服务器的启动命令. 默认可用的变量有: <code>@{{SERVER_MEMORY}}</code>, <code>@{{SERVER_IP}}</code>, 和 <code>@{{SERVER_PORT}}</code>.</p>
                 </div>
                 <div class="box-body">
                     <label for="pDefaultStartupCommand" class="form-label">默认启动命令</label>
@@ -72,7 +72,7 @@
                                 >{{ $nest->name }}</option>
                             @endforeach
                         </select>
-                        <p class="small text-muted no-margin">选择服务器实例使用的预设组.</p>
+                        <p class="small text-muted no-margin">选择服务器使用的预设组.</p>
                     </div>
                     <div class="form-group col-xs-12">
                         <label for="pEggId">预设</label>

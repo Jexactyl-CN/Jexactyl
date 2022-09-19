@@ -11,12 +11,12 @@
 @endsection
 
 @section('content-header')
-    <h1>{{ $node->name }}<small>更改节点服务器设置.</small></h1>
+    <h1>{{ $node->name }}<small>更改节点设置.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.nodes') }}">节点服务器</a></li>
+        <li><a href="{{ route('admin.nodes') }}">节点</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
-        <li class="active">节点服务器设置</li>
+        <li class="active">节点设置</li>
     </ol>
 @endsection
 
@@ -26,10 +26,10 @@
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">关于</a></li>
-                <li class="active"><a href="{{ route('admin.nodes.view.settings', $node->id) }}">节点服务器设置</a></li>
+                <li class="active"><a href="{{ route('admin.nodes.view.settings', $node->id) }}">节点设置</a></li>
                 <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">守护进程设置</a></li>
                 <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">资源分配</a></li>
-                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">服务器实例</a></li>
+                <li><a href="{{ route('admin.nodes.view.servers', $node->id) }}">服务器</a></li>
             </ul>
         </div>
     </div>
@@ -39,11 +39,11 @@
         <div class="col-sm-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">节点服务器设置</h3>
+                    <h3 class="box-title">节点设置</h3>
                 </div>
                 <div class="box-body row">
                     <div class="form-group col-xs-12">
-                        <label for="name" class="control-label">节点服务器名称</label>
+                        <label for="name" class="control-label">节点名称</label>
                         <div>
                             <input type="text" autocomplete="off" name="name" class="form-control" value="{{ old('name', $node->name) }}" />
                             <p class="text-muted"><small>字符限制: <code>a-zA-Z0-9_.-</code> 和 <code>[空格]</code> (最少 1, 最多 100 字符).</small></p>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-12">
-                        <label for="public" class="control-label">允许自动超额资源分配 <sup><a data-toggle="tooltip" data-placement="top" title="允许自动分配给该节点服务器？">?</a></sup></label>
+                        <label for="public" class="control-label">允许自动超额资源分配 <sup><a data-toggle="tooltip" data-placement="top" title="允许自动分配给该节点？">?</a></sup></label>
                         <div>
                             <input type="radio" name="public" value="1" {{ (old('public', $node->public)) ? 'checked' : '' }} id="public_1" checked> <label for="public_1" style="padding-left:5px;">是</label><br />
                             <input type="radio" name="public" value="0" {{ (old('public', $node->public)) ? '' : 'checked' }} id="public_0"> <label for="public_0" style="padding-left:5px;">否</label>
@@ -77,7 +77,7 @@
                         <div>
                             <input type="text" autocomplete="off" name="fqdn" class="form-control" value="{{ old('fqdn', $node->fqdn) }}" />
                         </div>
-                        <p class="text-muted"><small>请输入节点服务器域名 (例如 <code>node.example.com</code>) 用来连接至守护进程. 仅当您没有为此节点使用 SSL 时才可以使用 IP 地址.
+                        <p class="text-muted"><small>请输入节点域名 (例如 <code>node.example.com</code>) 用来连接至守护进程. 仅当您没有为此节点使用 SSL 时才可以使用 IP 地址.
                                 <a tabindex="0" data-toggle="popover" data-trigger="focus" title="为什么需要(FQDN)域名？" data-content="为了保护您的服务器与此节点之间的通信，我们使用 SSL。我们无法为 IP 地址生成 SSL 证书，因此您需要提供(FQDN)域名。">为什么？</a>
                             </small></p>
                     </div>

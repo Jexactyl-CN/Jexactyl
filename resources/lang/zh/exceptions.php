@@ -22,9 +22,9 @@ return [
         'port_out_of_range' => '分配中的端口必须大于 1024 且小于或等于 65535。',
     ],
     'nest' => [
-        'delete_has_servers' => '无法从面板中删除关联了服务器实例的预设组。',
+        'delete_has_servers' => '无法从面板中删除关联了服务器的预设组。',
         'egg' => [
-            'delete_has_servers' => '无法从面板中删除关联了服务器实例的预设。',
+            'delete_has_servers' => '无法从面板中删除关联了服务器的预设。',
             'invalid_copy_id' => '选择用于复制脚本的预设不存在，或正在复制脚本本身。',
             'must_be_child' => '此预设的 "复制设置自" 指令必须是选定预设组的子选项。',
             'has_children' => '此预设是一个或多个其他预设的父级。请在删除此预设之前删除这些预设。',
@@ -52,7 +52,7 @@ return [
         'chain_interval_too_long' => '链式任务的最大间隔时间是 15 分钟。',
     ],
     'locations' => [
-        'has_nodes' => '无法删除关联了节点服务器的地域。',
+        'has_nodes' => '无法删除关联了节点的地域。',
     ],
     'users' => [
         'node_revocation_failed' => '无法撤销 <a href=":link">节点 #:node</a> 上的密钥。:error',

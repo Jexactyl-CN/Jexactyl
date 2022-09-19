@@ -27,7 +27,7 @@ export default () => {
     return (
         <PageContentBlock title={'Account SSH'}>
             <h1 className={'j-left text-5xl'}>SSH 密钥</h1>
-            <h3 className={'j-left text-2xl text-neutral-500'}>创建 SSH 密钥以连接到您的服务器实例。</h3>
+            <h3 className={'j-left text-2xl text-neutral-500'}>创建 SSH 密钥以连接到您的服务器。</h3>
             <FlashMessageRender byKey={'account'} />
             <div className={'j-up md:flex flex-nowrap my-10'}>
                 <ContentBox title={'添加 SSH 密钥'} css={tw`flex-none w-full md:w-1/2`}>

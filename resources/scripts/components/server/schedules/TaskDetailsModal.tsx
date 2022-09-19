@@ -155,10 +155,10 @@ const TaskDetailsModal = ({ schedule, task }: Props) => {
                                 <Label>任务操作</Label>
                                 <FormikFieldWrapper name={'payload'}>
                                     <FormikField as={Select} name={'payload'}>
-                                        <option value={'start'}>启动服务器实例</option>
-                                        <option value={'restart'}>重启服务器实例</option>
-                                        <option value={'stop'}>关闭服务器实例</option>
-                                        <option value={'kill'}>停止服务器实例</option>
+                                        <option value={'start'}>启动服务器</option>
+                                        <option value={'restart'}>重启服务器</option>
+                                        <option value={'stop'}>关闭服务器</option>
+                                        <option value={'kill'}>停止服务器</option>
                                     </FormikField>
                                 </FormikFieldWrapper>
                             </div>

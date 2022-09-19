@@ -48,7 +48,7 @@
                                     <input type="text" id="store_disk" value="{{ $user->store_disk }}" name="store_disk" class="form-control form-autocomplete-stop">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="store_slots" class="control-label">可用的服务器实例</label>
+                                    <label for="store_slots" class="control-label">可用的服务器</label>
                                     <input type="text" id="store_slots" value="{{ $user->store_slots }}" name="store_slots" class="form-control form-autocomplete-stop">
                                 </div>
                                 <div class="form-group col-md-4">

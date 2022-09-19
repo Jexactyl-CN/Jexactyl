@@ -34,7 +34,7 @@ export default () => {
     return (
         <ServerContentBlock title={'活动日志'}>
             <FlashMessageRender byKey={'server:activity'} />
-            <h1 className={'j-left text-5xl'}>服务器实例活动日志</h1>
+            <h1 className={'j-left text-5xl'}>服务器活动日志</h1>
             <h3 className={'j-left text-2xl mt-2 text-neutral-500 mb-10'}>查看此服务器上的活动日志。</h3>
             {(filters.filters?.event || filters.filters?.ip) && (
                 <div className={'flex justify-end mb-2'}>

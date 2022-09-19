@@ -11,7 +11,7 @@
 @endsection
 
 @section('content-header')
-    <h1>新预设<small>为服务器实例创建新预设.</small></h1>
+    <h1>新预设<small>为服务器创建新预设.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
         <li><a href="{{ route('admin.nests') }}">预设组</a></li>

@@ -41,7 +41,7 @@ export default () => {
         socket.on('status', (status) => setServerStatus(status));
 
         socket.on('daemon error', (message) => {
-            console.warn('节点服务器传出错误信息:', message);
+            console.warn('节点传出错误信息:', message);
         });
 
         socket.on('token expiring', () => updateToken(uuid, socket));
@@ -111,7 +111,7 @@ export default () => {
                     {error === 'connecting' ? (
                         <>
                             <Spinner size={'small'} />
-                            <p css={tw`ml-2 text-sm text-red-100`}>我们在连接到你的服务器实例时出现错误，请等待...</p>
+                            <p css={tw`ml-2 text-sm text-red-100`}>我们在连接到你的服务器时出现错误，请等待...</p>
                         </>
                     ) : (
                         <p css={tw`ml-2 text-sm text-white`}>{error}</p>

@@ -7,7 +7,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    节点服务器列表
+    节点列表
 @endsection
 
 @section('scripts')
@@ -16,10 +16,10 @@
 @endsection
 
 @section('content-header')
-    <h1>节点服务器<small>连接到面板服务器的所有节点服务器.</small></h1>
+    <h1>节点<small>连接到面板服务器的所有节点.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li class="active">节点服务器</li>
+        <li class="active">节点</li>
     </ol>
 @endsection
 
@@ -50,7 +50,7 @@
                             <th>地域</th>
                             <th>内存容量</th>
                             <th>存储容量</th>
-                            <th class="text-center">服务器实例</th>
+                            <th class="text-center">服务器</th>
                             <th class="text-center">SSL</th>
                             <th class="text-center">公开</th>
                         </tr>
@@ -97,7 +97,7 @@
                 });
                 $(element).removeClass('text-muted').find('i').removeClass().addClass('fa fa-fw fa-heartbeat faa-pulse animated').css('color', '#50af51');
             }).fail(function (error) {
-                var errorText = '无法连接至节点服务器! 查看浏览器开发控制台以了解更多.';
+                var errorText = '无法连接至节点! 查看浏览器开发控制台以了解更多.';
                 try {
                     errorText = error.responseJSON.errors[0].detail || errorText;
                 } catch (ex) {}

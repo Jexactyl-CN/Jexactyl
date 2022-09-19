@@ -7,14 +7,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例 — {{ $server->name }}
+    服务器 — {{ $server->name }}
 @endsection
 
 @section('content-header')
     <h1>{{ $server->name }}<small>{{ str_limit($server->description) }}</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
+        <li><a href="{{ route('admin.servers') }}">服务器</a></li>
         <li class="active">{{ $server->name }}</li>
     </ol>
 @endsection
@@ -168,7 +168,7 @@
                         <div class="small-box bg-gray">
                             <div class="inner">
                                 <h3>{{ str_limit($server->node->name, 16) }}</h3>
-                                <p>所在节点服务器</p>
+                                <p>所在节点</p>
                             </div>
                             <div class="icon"><i class="fa fa-codepen"></i></div>
                             <a href="{{ route('admin.nodes.view', $server->node->id) }}" class="small-box-footer">

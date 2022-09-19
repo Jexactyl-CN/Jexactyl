@@ -27,7 +27,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                 <ContentContainer css={tw`text-sm text-center my-4`}>
                     <p css={tw`text-neutral-500 sm:float-left`}>
                         &copy; <a href={'https://jexactyl.com'}>Jexactyl,</a> built on{' '}
-                        <a href={'https://pterodactyl.io'}>Pterodactyl.</a> which Sinicizated by{' '}
+                        <a href={'https://pterodactyl.io'}>Pterodactyl.</a> | Sinicizated by{' '}
                         <a href={'https://pterodactyl.top'}>翼龙中国.</a>
                     </p>
                     <p css={tw`text-neutral-500 sm:float-right`}>

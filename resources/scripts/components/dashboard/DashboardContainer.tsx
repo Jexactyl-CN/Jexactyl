@@ -55,7 +55,7 @@ export default () => {
             {rootAdmin && (
                 <div css={tw`mb-10 flex justify-between items-center`}>
                     <div>
-                        <h1 className={'j-left text-5xl'}>你的服务器实例</h1>
+                        <h1 className={'j-left text-5xl'}>你的服务器</h1>
                         <h3 className={'j-left text-2xl mt-2 text-neutral-500'}>
                             选择一个服务器以查看、更新或修改。
                         </h3>
@@ -88,7 +88,7 @@ export default () => {
                         ) : (
                             <ScreenBlock
                                 title={'这里似乎很安静...'}
-                                message={'没有可显示的可用服务器实例。'}
+                                message={'没有可显示的可用服务器。'}
                                 image={NotFoundSvg}
                                 noContainer
                             />

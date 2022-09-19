@@ -149,7 +149,7 @@ export default () => {
                         </Button.Success>
                     </Wrapper>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>
-                        购买服务器位以部署服务器实例。
+                        购买服务器位以部署服务器。
                     </p>
                     <p css={tw`mt-1 text-gray-500 text-xs flex justify-center`}>每个槽位的成本: {cost.slot} 积分</p>
                 </TitledGreyBox>

@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例 — {{ $server->name }}: 挂载
+    服务器 — {{ $server->name }}: 挂载
 @endsection
 
 @section('content-header')
-    <h1>{{ $server->name }}<small>管理服务器实例的挂载.</small></h1>
+    <h1>{{ $server->name }}<small>管理服务器的挂载.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
+        <li><a href="{{ route('admin.servers') }}">服务器</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
         <li class="active">挂载</li>
     </ol>

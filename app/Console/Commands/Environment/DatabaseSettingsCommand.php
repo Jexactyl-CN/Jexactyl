@@ -71,14 +71,14 @@ class DatabaseSettingsCommand extends Command
      */
     public function handle()
     {
-        $this->output->note('强烈建议不要使用“localhost”作为您的数据库主机，因为我们已经看到频繁的套接字连接问题。如果你想使用本地连接，你应该使用“127.0.0.1”.');
+        $this->output->note('强烈建议不要使用"localhost"作为您的数据库主机，因为我们已经看到频繁的套接字连接问题。如果你想使用本地连接，你应该使用"127.0.0.1".');
         $this->variables['DB_HOST'] = $this->option('host') ?? $this->ask(
-            '数据库主机地址',
+            '数据库地址',
             config('database.connections.mysql.host', '127.0.0.1')
         );
 
         $this->variables['DB_PORT'] = $this->option('port') ?? $this->ask(
-            '数据库主机端口',
+            '数据库端口',
             config('database.connections.mysql.port', 3306)
         );
 

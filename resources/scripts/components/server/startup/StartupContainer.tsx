@@ -111,7 +111,7 @@ const StartupContainer = () => {
                                 </Select>
                             </InputSpinner>
                             <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                这是一项高级设置，其允许您选择在运行此服务器实例时使用的 Docker 映像。
+                                这是一项高级设置，其允许您选择在运行此服务器时使用的 Docker 映像。
                             </p>
                         </>
                     ) : (

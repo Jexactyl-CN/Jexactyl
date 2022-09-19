@@ -16,7 +16,7 @@ class ServerStateConflictException extends ConflictHttpException
     {
         $message = '此服务器目前处于不受支持的状态，请稍后再试。';
         if ($server->isSuspended()) {
-            $message = '此服务器已被停用，请求的功能不可用。';
+            $message = '此服务器已被冻结，请求的功能不可用。';
         } elseif (!$server->isInstalled()) {
             $message = '此服务器尚未完成安装过程，请稍后再试。';
         } elseif ($server->status === Server::STATUS_RESTORING_BACKUP) {

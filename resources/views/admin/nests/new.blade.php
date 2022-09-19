@@ -11,7 +11,7 @@
 @endsection
 
 @section('content-header')
-    <h1>新预设组<small>配置一个新的预设部署到所有节点服务器.</small></h1>
+    <h1>新预设组<small>配置一个新的预设部署到所有节点.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
         <li><a href="{{ route('admin.nests') }}">预设组</a></li>

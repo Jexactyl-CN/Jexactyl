@@ -87,7 +87,7 @@
                         <th>ID</th>
                         <th>名称</th>
                         <th>描述</th>
-                        <th class="text-center">服务器实例</th>
+                        <th class="text-center">服务器</th>
                         <th class="text-center"></th>
                     </tr>
                     @foreach($nest->eggs as $egg)

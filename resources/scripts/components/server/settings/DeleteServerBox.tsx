@@ -29,7 +29,7 @@ export default () => {
                 addFlash({
                     key: 'settings',
                     type: 'success',
-                    message: '您的服务器实例已被删除。',
+                    message: '您的服务器已被删除。',
                 });
                 // @ts-expect-error this is valid
                 window.location = '/';
@@ -38,11 +38,11 @@ export default () => {
     };
 
     return (
-        <TitledGreyBox title={'删除服务器实例'} className={'relative mb-12'}>
+        <TitledGreyBox title={'删除服务器'} className={'relative mb-12'}>
             <Dialog.Confirm
                 open={warn}
-                title={'确认删除服务器实例'}
-                confirm={'是，删除服务器实例'}
+                title={'确认删除服务器'}
+                confirm={'是，删除服务器'}
                 onClose={() => setWarn(false)}
                 onConfirmed={() => {
                     setConfirm(true);
@@ -86,7 +86,7 @@ export default () => {
             </p>
             <div className={'mt-6 font-medium text-right'}>
                 <Button.Danger variant={Button.Variants.Secondary} onClick={() => setWarn(true)}>
-                    删除服务器实例
+                    删除服务器
                 </Button.Danger>
             </div>
         </TitledGreyBox>

@@ -7,14 +7,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    节点服务器 &rarr; 新建
+    节点 &rarr; 新建
 @endsection
 
 @section('content-header')
-    <h1>新节点服务器<small>在本地或远程主机创建面板使用的新节点服务器.</small></h1>
+    <h1>新节点<small>在本地或远程主机创建面板使用的新节点.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.nodes') }}">节点服务器</a></li>
+        <li><a href="{{ route('admin.nodes') }}">节点</a></li>
         <li class="active">新建</li>
     </ol>
 @endsection
@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label for="pFQDN" class="form-label">域名(FQDN)</label>
                         <input type="text" name="fqdn" id="pFQDN" class="form-control" value="{{ old('fqdn') }}"/>
-                        <p class="text-muted small">请输入节点服务器域名 (例如 <code>node.example.com</code>) 用来连接至节点服务器主机. IP 地址 <em>仅能</em> 在不使用SSL连接的情况下填写使用.</p>
+                        <p class="text-muted small">请输入节点域名 (例如 <code>node.example.com</code>) 用来连接至节点主机. IP 地址 <em>仅能</em> 在不使用SSL连接的情况下填写使用.</p>
                     </div>
                     <div class="form-group">
                         <label class="form-label">与面板前端以 SSL 通信</label>
@@ -144,7 +144,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <p class="text-muted small">输入可用于新服务器的内存总量。如果您希望允许过度分配内存，请输入您希望允许的百分比。要禁用检查过度分配，请输入 <code>-1</code> 于此处. 输入 <code>0</code> 的话，如果服务器实例内存总量超过节点服务器最大内存总量，将阻止创建新服务器.</p>
+                            <p class="text-muted small">输入可用于新服务器的内存总量。如果您希望允许过度分配内存，请输入您希望允许的百分比。要禁用检查过度分配，请输入 <code>-1</code> 于此处. 输入 <code>0</code> 的话，如果服务器内存总量超过节点最大内存总量，将阻止创建新服务器.</p>
                         </div>
                     </div>
                     <div class="row">
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <p class="text-muted small">输入可用于新服务器的存储空间总量。如果您希望允许过度分配存储空间，请输入您希望允许的百分比。要禁用检查过度分配，请输入 <code>-1</code> 于此处. 输入 <code>0</code> 的话，如果服务器实例存储空间总用量超过节点服务器最大存储空间总量，将阻止创建新服务器.</p>
+                            <p class="text-muted small">输入可用于新服务器的存储空间总量。如果您希望允许过度分配存储空间，请输入您希望允许的百分比。要禁用检查过度分配，请输入 <code>-1</code> 于此处. 输入 <code>0</code> 的话，如果服务器存储空间总用量超过节点最大存储空间总量，将阻止创建新服务器.</p>
                         </div>
                     </div>
                     <div class="row">
@@ -182,7 +182,7 @@
                 </div>
                 <div class="box-footer">
                     {!! csrf_field() !!}
-                    <button type="submit" class="btn btn-success pull-right">创建节点服务器</button>
+                    <button type="submit" class="btn btn-success pull-right">创建节点</button>
                 </div>
             </div>
         </div>

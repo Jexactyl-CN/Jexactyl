@@ -51,14 +51,14 @@ export default () => {
                 addFlash({
                     key: 'server:edit',
                     type: 'success',
-                    message: '已成功编辑服务器实例资源。',
+                    message: '已成功编辑服务器资源。',
                 });
             })
             .catch((error) => clearAndAddHttpError({ key: 'server:edit', error }));
     };
 
     return (
-        <ServerContentBlock title={'编辑服务器实例'}>
+        <ServerContentBlock title={'编辑服务器'}>
             <SpinnerOverlay size={'large'} visible={submitting} />
             <Dialog.Confirm
                 open={submitting}
@@ -66,12 +66,12 @@ export default () => {
                 title={'确认资源的编辑'}
                 onConfirmed={() => edit(resource, amount)}
             >
-                这将从您的帐户中删除相应的资源并添加到您的服务器实例当中。你确定你要继续吗？
+                这将从您的帐户中删除相应的资源并添加到您的服务器当中。你确定你要继续吗？
             </Dialog.Confirm>
             <FlashMessageRender byKey={'server:edit'} css={tw`mb-4`} />
             <h1 className={'j-left text-5xl'}>编辑资源</h1>
             <h3 className={'j-left text-2xl mt-2 text-neutral-500 mb-10'}>
-                从您的服务器实例添加/删除资源。
+                从您的服务器添加/删除资源。
             </h3>
             <Container css={tw`lg:grid lg:grid-cols-3 gap-4 my-10`}>
                 <TitledGreyBox title={'编辑服务器 CPU 限制'} css={tw`mt-8 sm:mt-0`}>

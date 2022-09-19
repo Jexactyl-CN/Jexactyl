@@ -49,7 +49,7 @@
     <div class="col-sm-6">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">节点服务器</h3>
+                <h3 class="box-title">节点</h3>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
@@ -57,7 +57,7 @@
                         <th>ID</th>
                         <th>名称</th>
                         <th>域名</th>
-                        <th>服务器实例</th>
+                        <th>服务器</th>
                     </tr>
                     @foreach($location->nodes as $node)
                         <tr>

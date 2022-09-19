@@ -27,8 +27,8 @@ const ServerConsoleContainer = () => {
             {(isInstalling || isTransferring) && (
                 <Alert type={'warning'} className={'mb-4'}>
                     {isInstalling
-                        ? '此服务器实例当前正在运行其安装过程，大多数操作都是不可用的。'
-                        : '此服务器实例当前正在转移到另一个节点服务器，所有操作都不可用。'}
+                        ? '此服务器当前正在运行其安装过程，大多数操作都是不可用的。'
+                        : '此服务器当前正在转移到另一个节点，所有操作都不可用。'}
                 </Alert>
             )}
             <FlashMessageRender byKey={'console:share'} className={'mb-2'} />

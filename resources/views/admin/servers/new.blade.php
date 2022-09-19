@@ -7,15 +7,15 @@
 @extends('layouts.admin')
 
 @section('title')
-    创建服务器实例
+    创建服务器
 @endsection
 
 @section('content-header')
-    <h1>创建服务器实例<small>创建一个新的服务器实例.</small></h1>
+    <h1>创建服务器<small>创建一个新的服务器.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
-        <li class="active">创建服务器实例</li>
+        <li><a href="{{ route('admin.servers') }}">服务器</a></li>
+        <li class="active">创建服务器</li>
     </ol>
 @endsection
 
@@ -45,9 +45,9 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="pDescription" class="control-label">服务器实例描述</label>
+                            <label for="pDescription" class="control-label">服务器描述</label>
                             <textarea id="pDescription" name="description" rows="3" class="form-control">{{ old('description') }}</textarea>
-                            <p class="text-muted small">服务器实例的简单介绍.</p>
+                            <p class="text-muted small">服务器的简单介绍.</p>
                         </div>
 
                         <div class="form-group">
@@ -72,7 +72,7 @@
 
                 <div class="box-body row">
                     <div class="form-group col-sm-4">
-                        <label for="pNodeId">节点服务器</label>
+                        <label for="pNodeId">节点</label>
                         <select name="node_id" id="pNodeId" class="form-control">
                             @foreach($locations as $location)
                                 <optgroup label="{{ $location->long }} ({{ $location->short }})">
@@ -87,19 +87,19 @@
                             @endforeach
                         </select>
 
-                        <p class="small text-muted no-margin">此服务器实例运行于此节点服务器上.</p>
+                        <p class="small text-muted no-margin">此服务器运行于此节点上.</p>
                     </div>
 
                     <div class="form-group col-sm-4">
                         <label for="pAllocation">默认网络分配</label>
                         <select id="pAllocation" name="allocation_id" class="form-control"></select>
-                        <p class="small text-muted no-margin">此服务器实例的默认网络分配.</p>
+                        <p class="small text-muted no-margin">此服务器的默认网络分配.</p>
                     </div>
 
                     <div class="form-group col-sm-4">
                         <label for="pAllocationAdditional">额外网络分配</label>
                         <select id="pAllocationAdditional" name="allocation_additional[]" class="form-control" multiple></select>
-                        <p class="small text-muted no-margin">此服务器实例的额外网络分配.</p>
+                        <p class="small text-muted no-margin">此服务器的额外网络分配.</p>
                     </div>
                 </div>
             </div>
@@ -179,7 +179,7 @@
                             <span class="input-group-addon">MB</span>
                         </div>
 
-                        <p class="text-muted small">此容器允许的最大内存量。将此设置为 <code>0</code> 将允许此服务器实例无限制使用内存.</p>
+                        <p class="text-muted small">此容器允许的最大内存量。将此设置为 <code>0</code> 将允许此服务器无限制使用内存.</p>
                     </div>
 
                     <div class="form-group col-xs-6">
@@ -190,7 +190,7 @@
                             <span class="input-group-addon">MB</span>
                         </div>
 
-                        <p class="text-muted small">将此设置为 <code>0</code> 将禁用此服务器实例上的交换内存. 将此设置为 <code>-1</code> 将允许此服务器实例使用无限交换内存.</p>
+                        <p class="text-muted small">将此设置为 <code>0</code> 将禁用此服务器上的交换内存. 将此设置为 <code>-1</code> 将允许此服务器使用无限交换内存.</p>
                     </div>
                 </div>
 
@@ -203,7 +203,7 @@
                             <span class="input-group-addon">MB</span>
                         </div>
 
-                        <p class="text-muted small">如果此服务器使用的空间超过此数量，则将不允许它启动。如果服务器在运行时超过此限制，它将安全停止并锁定，直到有足够的可用空间。调成 <code>0</code> 将允许此服务器实例使用无限存储空间.</p>
+                        <p class="text-muted small">如果此服务器使用的空间超过此数量，则将不允许它启动。如果服务器在运行时超过此限制，它将安全停止并锁定，直到有足够的可用空间。调成 <code>0</code> 将允许此服务器使用无限存储空间.</p>
                     </div>
 
                     <div class="form-group col-xs-6">
@@ -213,7 +213,7 @@
                             <input type="text" id="pIO" name="io" class="form-control" value="{{ old('io', 500) }}" />
                         </div>
 
-                        <p class="text-muted small"><strong>高级</strong>: 此服务器实例相对于其他 <em>运行中</em> 服务器实例的 IO 性能 . 此值应介于 <code>10</code> 至 <code>1000</code>. 请查阅 <a href="https://docs.docker.com/engine/reference/run/#block-io-bandwidth-blkio-constraint" target="_blank">此文档</a> 了解更多.</p>
+                        <p class="text-muted small"><strong>高级</strong>: 此服务器相对于其他 <em>运行中</em> 服务器的 IO 性能 . 此值应介于 <code>10</code> 至 <code>1000</code>. 请查阅 <a href="https://docs.docker.com/engine/reference/run/#block-io-bandwidth-blkio-constraint" target="_blank">此文档</a> 了解更多.</p>
                     </div>
                     <div class="form-group col-xs-12">
                         <div class="checkbox checkbox-primary no-margin-bottom">
@@ -310,7 +310,7 @@
 
                 <div class="box-footer">
                     {!! csrf_field() !!}
-                    <input type="submit" class="btn btn-success pull-right" value="创建服务器实例" />
+                    <input type="submit" class="btn btn-success pull-right" value="创建服务器" />
                 </div>
             </div>
         </div>

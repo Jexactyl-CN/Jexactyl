@@ -57,7 +57,7 @@ const ConflictStateRenderer = () => {
             image={ServerRestoreSvg}
             message={
                 isTransferring
-                    ? '您的服务器正在转移到新节点服务器，请稍后再回来查看。'
+                    ? '您的服务器正在转移到新节点，请稍后再回来查看。'
                     : '您的服务器当前正在从备份中恢复，请过几分钟再来查看。'
             }
         />

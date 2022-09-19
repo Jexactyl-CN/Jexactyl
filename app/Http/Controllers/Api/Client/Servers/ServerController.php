@@ -84,7 +84,7 @@ class ServerController extends ClientApiController
         try {
             $this->deletionService->returnResources(true)->handle($server);
         } catch (DisplayException $ex) {
-            throw new DisplayException('无法从系统中删除服务器实例。');
+            throw new DisplayException('无法从系统中删除服务器。');
         }
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);

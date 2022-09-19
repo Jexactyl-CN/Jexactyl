@@ -81,7 +81,7 @@ export default () => {
             case 'archive':
                 terminal.writeln(
                     TERMINAL_PRELUDE +
-                        '服务器文件已成功压缩打包，正在尝试连接到目标节点服务器....\u001b[0m'
+                        '服务器文件已成功压缩打包，正在尝试连接到目标节点....\u001b[0m'
                 );
         }
     };

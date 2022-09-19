@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{ $node->name }}: 服务器实例
+    {{ $node->name }}: 服务器
 @endsection
 
 @section('content-header')
-    <h1>{{ $node->name }}<small>此节点服务器上所有的服务器实例.</small></h1>
+    <h1>{{ $node->name }}<small>此节点上所有的服务器.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.nodes') }}">节点服务器</a></li>
+        <li><a href="{{ route('admin.nodes') }}">节点</a></li>
         <li><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></li>
-        <li class="active">服务器实例</li>
+        <li class="active">服务器</li>
     </ol>
 @endsection
 
@@ -20,10 +20,10 @@
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nodes.view', $node->id) }}">关于</a></li>
-                <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">节点服务器设置</a></li>
+                <li><a href="{{ route('admin.nodes.view.settings', $node->id) }}">节点设置</a></li>
                 <li><a href="{{ route('admin.nodes.view.configuration', $node->id) }}">守护进程设置</a></li>
                 <li><a href="{{ route('admin.nodes.view.allocation', $node->id) }}">资源分配</a></li>
-                <li class="active"><a href="{{ route('admin.nodes.view.servers', $node->id) }}">服务器实例</a></li>
+                <li class="active"><a href="{{ route('admin.nodes.view.servers', $node->id) }}">服务器</a></li>
             </ul>
         </div>
     </div>
@@ -32,14 +32,14 @@
     <div class="col-sm-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">服务器实例管理</h3>
+                <h3 class="box-title">服务器管理</h3>
             </div>
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover">
                     <tr>
                         <th>ID</th>
-                        <th>服务器实例名称</th>
-                        <th>服务器实例管理员</th>
+                        <th>服务器名称</th>
+                        <th>服务器管理员</th>
                         <th>使用预设</th>
                     </tr>
                     @foreach($servers as $server)

@@ -1,4 +1,4 @@
-{{-- Pterodactyl - Panel which Sinicizated by iLwork.CN STUDIO --}}
+{{-- Pterodactyl - Panel | Sinicizated by iLwork.CN STUDIO --}}
 {{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
 {{-- Simplified Chinese Translation Copyright (c) 2018 - 2022 ValiantShishu <vlssu@vlssu.com> --}}
 
@@ -7,14 +7,14 @@
 @extends('layouts.admin')
 
 @section('title')
-    服务器实例 — {{ $server->name }}: 详细信息
+    服务器 — {{ $server->name }}: 详细信息
 @endsection
 
 @section('content-header')
     <h1>{{ $server->name }}<small>编辑此服务器的详细信息，包括所有者和容器.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
-        <li><a href="{{ route('admin.servers') }}">服务器实例</a></li>
+        <li><a href="{{ route('admin.servers') }}">服务器</a></li>
         <li><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a></li>
         <li class="active">详细信息</li>
     </ol>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label for="description" class="control-label">服务器描述</label>
                         <textarea name="description" rows="3" class="form-control">{{ old('description', $server->description) }}</textarea>
-                        <p class="text-muted small">服务器实例的简介.</p>
+                        <p class="text-muted small">服务器的简介.</p>
                     </div>
                     <div class="form-group">
                         <label for="renewable" class="control-label">续订系统 <span class="field-required"></span></label>

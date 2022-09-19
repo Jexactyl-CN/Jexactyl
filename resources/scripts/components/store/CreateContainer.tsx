@@ -105,7 +105,7 @@ export default () => {
                 addFlash({
                     type: 'success',
                     key: 'store:create',
-                    message: '您的服务器实例已部署完毕，正在安装中。',
+                    message: '您的服务器已部署完毕，正在安装中。',
                 });
             });
     };

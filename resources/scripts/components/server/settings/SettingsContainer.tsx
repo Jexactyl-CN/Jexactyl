@@ -20,13 +20,13 @@ export default () => {
             <FlashMessageRender byKey={'settings'} css={tw`mb-4`} />
             <h1 className={'j-left text-5xl'}>设置</h1>
             <h3 className={'j-left text-2xl mt-2 text-neutral-500 mb-10'}>
-                控制您服务器实例的重要设置。
+                控制您服务器的重要设置。
             </h3>
             <div className={'md:flex'}>
                 <div className={'j-right w-full md:flex-1 md:mr-10'}>
                     <TitledGreyBox title={'调试信息'} css={tw`mb-6 md:mb-10`}>
                         <div css={tw`flex items-center justify-between text-sm`}>
-                            <p>节点服务器</p>
+                            <p>节点</p>
                             <code css={tw`font-mono bg-neutral-900 rounded py-1 px-2`}>{node}</code>
                         </div>
                         <CopyOnClick text={uuid}>

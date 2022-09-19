@@ -74,7 +74,7 @@ export default () => {
                 onConfirmed={() => doRenewal()}
             >
                 <SpinnerOverlay visible={isSubmit} />
-                您确定要花费 {store.renewals.cost} {store.currency} 来续费您的服务器实例吗？
+                您确定要花费 {store.renewals.cost} {store.currency} 来续费您的服务器吗？
             </Dialog.Confirm>
             <Dialog.Confirm
                 open={deleteDialog}
@@ -84,12 +84,12 @@ export default () => {
                 onConfirmed={() => setConfirmDialog(true)}
             >
                 <SpinnerOverlay visible={isSubmit} />
-                此操作会将您的服务器实例以及所有文件和配置从系统中删除。
+                此操作会将您的服务器以及所有文件和配置从系统中删除。
             </Dialog.Confirm>
             <form id={'delete-suspended-server-form'} onSubmit={doDeletion}>
                 <Dialog
                     open={confirmDialog}
-                    title={'服务器实例已停用'}
+                    title={'服务器已冻结'}
                     onClose={() => setConfirmDialog(false)}
                 >
                     {name !== serverName && (
@@ -119,11 +119,11 @@ export default () => {
                         css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 bg-neutral-900 rounded-lg shadow-lg text-center relative`}
                     >
                         <img src={ServerErrorSvg} css={tw`w-2/3 h-auto select-none mx-auto`} />
-                        <h2 css={tw`mt-10 font-bold text-4xl`}>已停用</h2>
+                        <h2 css={tw`mt-10 font-bold text-4xl`}>已冻结</h2>
                         {renewable ? (
                             <>
                                 <p css={tw`text-sm my-2`}>
-                                    您的服务器因未按时更新而被暂停。&apos;续订&apos; 按钮以重新激活您的服务器实例。如果您想删除服务器实例，则资源将自动退回您的帐户中，以便您的下次重新部署新的服务器实例。
+                                    您的服务器因未按时更新而被暂停。&apos;续订&apos; 按钮以重新激活您的服务器。如果您想删除服务器，则资源将自动退回您的帐户中，以便您的下次重新部署新的服务器。
                                 </p>
                                 <Button
                                     className={'mx-2 my-1'}
@@ -141,7 +141,7 @@ export default () => {
                                 </Button.Danger>
                             </>
                         ) : (
-                            <>此服务器已停用，无法访问。</>
+                            <>此服务器已冻结，无法访问。</>
                         )}
                     </div>
                 </div>

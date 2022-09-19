@@ -43,7 +43,7 @@
                         <p class="text-muted small">MYSQL 主机运行开放的端口.</p>
                     </div>
                     <div class="form-group">
-                        <label for="pNodeId" class="form-label">关联的节点服务器</label>
+                        <label for="pNodeId" class="form-label">关联的节点</label>
                         <select name="node_id" id="pNodeId" class="form-control">
                             <option value="">无</option>
                             @foreach($locations as $location)

@@ -136,10 +136,10 @@
 
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">节点服务器</h3>
+                    <h3 class="box-title">节点</h3>
 
                     <div class="box-tools">
-                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addNodesModal">添加节点服务器</button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addNodesModal">添加节点</button>
                     </div>
                 </div>
 
@@ -221,13 +221,13 @@
                             <span aria-hidden="true" style="color: #FFFFFF">&times;</span>
                         </button>
 
-                        <h4 class="modal-title">添加节点服务器</h4>
+                        <h4 class="modal-title">添加节点</h4>
                     </div>
 
                     <div class="modal-body">
                         <div class="row">
                             <div class="form-group col-md-12">
-                                <label for="pNodes">节点服务器</label>
+                                <label for="pNodes">节点</label>
                                 <select id="pNodes" name="nodes[]" class="form-control" multiple>
                                     @foreach ($locations as $location)
                                         <optgroup label="{{ $location->long }} ({{ $location->short }})">
@@ -267,7 +267,7 @@
             });
 
             $('#pNodes').select2({
-                placeholder: '选择节点服务器..',
+                placeholder: '选择节点..',
             });
 
             $('button[data-action="detach-egg"]').click(function (event) {
@@ -305,7 +305,7 @@
                     headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
                 }).done(function () {
                     element.parent().parent().addClass('warning').delay(100).fadeOut();
-                    swal({ type: 'success', title: '节点服务器已解除关联.' });
+                    swal({ type: 'success', title: '节点已解除关联.' });
                 }).fail(function (jqXHR) {
                     console.error(jqXHR);
                     swal({

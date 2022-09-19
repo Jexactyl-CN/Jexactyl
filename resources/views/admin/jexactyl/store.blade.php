@@ -137,10 +137,10 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label">每 1 个服务器实例的成本</label>
+                                <label class="control-label">每 1 个服务器的成本</label>
                                 <div>
                                     <input type="text" class="form-control" name="store:cost:slot" value="{{ $slot }}" />
-                                    <p class="text-muted"><small>用于计算 1 个服务器实例的总成本。</small></p>
+                                    <p class="text-muted"><small>用于计算 1 个服务器的总成本。</small></p>
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
