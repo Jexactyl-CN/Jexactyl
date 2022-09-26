@@ -73,12 +73,12 @@ class ServerController extends ClientApiController
     {
         $user = $request->user();
 
-        if ($user->id != $server->owner_id ||$request['name'] != $server->name) {
+        if ($user->id != $server->owner_id) {
             throw new DisplayException('您无权执行此操作。');
         };
 
         if ($this->settings->get('jexactyl::renewal:deletion') != 'true') {
-            throw new DisplayException('This feature has been locked by administrators.');
+            throw new DisplayException('该功能已被管理员锁定。');
         };
 
         try {

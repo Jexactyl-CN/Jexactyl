@@ -24,11 +24,11 @@ class ResourceController extends ClientApiController
 
     /**
      * Get the resources for the authenticated user.
-     * 
+     *
      * This method is used instead of states so that we can retrieve
      * data via API calls, so the page does not need a full refresh
      * in order to retrieve the values.
-     * 
+     *
      * @throws DisplayException
      */
     public function user(GetStoreUserRequest $request)
@@ -40,7 +40,7 @@ class ResourceController extends ClientApiController
 
     /**
      * Allows a user to earn credits via passive earning.
-     * 
+     *
      * @throws DisplayException
      */
     public function earn(StoreEarnRequest $request)
@@ -49,7 +49,7 @@ class ResourceController extends ClientApiController
         $amount = $this->settings->get('jexactyl::earn:amount', 0);
 
         if ($this->settings->get('jexactyl::earn:enabled') == 'false') {
-            throw new DisplayException('Credit earning is currently disabled');
+            throw new DisplayException('目前，赚取积分的功能已被禁用。');
             return;
         };
 
@@ -58,7 +58,7 @@ class ResourceController extends ClientApiController
                 'store_balance' => $user->store_balance + $amount,
             ]);
         } catch (DisplayException $ex) {
-            throw new DisplayException('Unable to passively earn coins.');
+            throw new DisplayException('无法被动赚取积分。');
         }
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
@@ -66,7 +66,7 @@ class ResourceController extends ClientApiController
 
     /**
      * Allows users to purchase resources via the store.
-     * 
+     *
      * @throws DisplayException
      */
     public function purchase(PurchaseResourceRequest $request): JsonResponse
@@ -79,7 +79,7 @@ class ResourceController extends ClientApiController
         $amount = $this->getAmount($resource);
 
         if ($balance < $cost) {
-            throw new DisplayException('Unable to purchase resource: You do not have enough credits.');
+            throw new DisplayException('无法购买资源。你没有足够的积分。');
         };
 
         $request->user()->update([
@@ -96,7 +96,7 @@ class ResourceController extends ClientApiController
 
     /**
      * Returns the price of the resource.
-     * 
+     *
      * @throws DisplayException
      */
     protected function getPrice(string $resource): int
@@ -119,13 +119,13 @@ class ResourceController extends ClientApiController
             case 'databases':
                 return $this->settings->get($prefix.'database');
             default:
-                throw new DisplayException('Unable to get resource price.');
+                throw new DisplayException('无法获取资源价格。');
         }
     }
 
     /**
      * Returns how much of the resource to assign.
-     * 
+     *
      * @throws DisplayException
      */
     protected function getAmount(string $resource): int
@@ -146,13 +146,13 @@ class ResourceController extends ClientApiController
             case 'databases':
                 return 1;
             default:
-                throw new DisplayException('Unable to get resource details.');
+                throw new DisplayException('无法获得资源详情。');
         }
     }
 
     /**
      * Return the resource type for database entries.
-     * 
+     *
      * @throws DisplayException
      */
     protected function getResource(PurchaseResourceRequest $request)

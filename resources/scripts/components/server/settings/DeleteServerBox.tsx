@@ -54,7 +54,7 @@ export default () => {
             <form id={'delete-server-form'} onSubmit={submit}>
                 <Dialog
                     open={confirm}
-                    title={'Password confirmation required'}
+                    title={'确认删除服务器'}
                     onClose={() => {
                         setConfirm(false);
                         setName('');
@@ -63,7 +63,7 @@ export default () => {
                     {name !== serverName && (
                         <>
                             <p className={'my-2 text-gray-400'}>
-                                Type <Code>{serverName}</Code> below.
+                                在下面输入 <Code>{serverName}</Code>。
                             </p>
                             <Input type={'text'} value={name} onChange={(n) => setName(n.target.value)} />
                         </>
