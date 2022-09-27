@@ -10,7 +10,7 @@
     "description": "VoIP 软件在设计时考虑了安全性，具有清晰的语音质量、无限的自定义选项以及可扩展到数千名用户同时使用的功能。",
     "features": null,
     "images": [
-        "ghcr.io\/pterodactyl\/yolks:debian"
+        "registry.cn-shanghai.aliyuncs.com\/pterodactyl-china\/yolks:debian"
     ],
     "file_denylist": [],
     "startup": ".\/ts3server default_voice_port={{SERVER_PORT}} query_port={{QUERY_PORT}} filetransfer_ip=0.0.0.0 filetransfer_port={{FILE_TRANSFER}} license_accepted=1",
