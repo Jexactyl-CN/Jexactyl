@@ -65,7 +65,7 @@ class ApprovalsController extends Controller
     {
       User::where('approved', false)->update(['approved', true]);
 
-      $this->alert->success('All users have been approved successfully.')->flash();
+      $this->alert->success('已成功批准所有用户。')->flash();
       return redirect()->route('admin.jexactyl.approvals');
     }
 

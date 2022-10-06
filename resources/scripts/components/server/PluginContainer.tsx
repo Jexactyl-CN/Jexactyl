@@ -57,7 +57,7 @@ export default () => {
     return (
         <ServerContentBlock title={'插件'}>
             <FlashMessageRender byKey={'server:plugins'} />
-            <h1 className={'j-left text-5xl'}>插件安装脚本</h1>
+            <h1 className={'j-left text-5xl'}>插件安装程序</h1>
             <h3 className={'j-left text-2xl mt-2 text-neutral-500 mb-10'}>搜索和下载 Spigot 插件。</h3>
             <Formik
                 onSubmit={submit}

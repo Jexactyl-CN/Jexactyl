@@ -97,12 +97,11 @@
                                     <input id="pForceOutgoingIp" name="force_outgoing_ip" type="checkbox" value="1" @if($egg->force_outgoing_ip) checked @endif />
                                     <label for="pForceOutgoingIp" class="strong">Force Outgoing IP</label>
                                     <p class="text-muted small">
-                                        Forces all outgoing network traffic to have its Source IP NATed to the IP of the server's primary allocation IP.
-                                        Required for certain games to work properly when the Node has multiple public IP addresses.
+                                        强制所有传出的网络流量将其源 IP地址转换(NAT) 到服务器首选IP 的 IP地址。
+                                        当节点具有多个公共IP地址时，某些游戏需要它才能正常运行。
                                         <br>
                                         <strong>
-                                            Enabling this option will disable internal networking for any servers using this egg,
-                                            causing them to be unable to internally access other servers on the same node.
+                                            启用此选项将禁用任何使用此预设的服务器内网，这将导致它们无法从内部访问同一节点上的其他服务器。
                                         </strong>
                                     </p>
                                 </div>
