@@ -82,9 +82,9 @@
                     <div class="form-group col-xs-12">
                         <div class="checkbox checkbox-primary no-margin-bottom">
                             <input id="pSkipScripting" name="skip_scripts" type="checkbox" value="1" @if($server->skip_scripts) checked @endif />
-                            <label for="pSkipScripting" class="strong">跳过预设安装程序</label>
+                            <label for="pSkipScripting" class="strong">跳过预设安装脚本</label>
                         </div>
-                        <p class="small text-muted no-margin">如果选定的预设附加了安装程序，则该程序将在安装期间运行。如果您想跳过此步骤，请选中此框.</p>
+                        <p class="small text-muted no-margin">如果选定的预设附加了安装脚本，则该程序将在安装期间运行。如果您想跳过此步骤，请选中此框.</p>
                     </div>
                 </div>
             </div>

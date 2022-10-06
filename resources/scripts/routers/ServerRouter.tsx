@@ -45,7 +45,7 @@ const ConflictStateRenderer = () => {
 
     return status === 'installing' || status === 'install_failed' ? (
         <ScreenBlock
-            title={'正在运行安装程序'}
+            title={'正在运行安装脚本'}
             image={ServerInstallSvg}
             message={'此服务器应该很快就准备好了，请几分钟后再试'}
         />

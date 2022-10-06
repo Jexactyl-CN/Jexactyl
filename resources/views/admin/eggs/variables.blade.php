@@ -28,7 +28,7 @@
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">设置</a></li>
                 <li class="active"><a href="{{ route('admin.nests.egg.variables', $egg->id) }}">变量</a></li>
-                <li><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">安装程序</a></li>
+                <li><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">安装脚本</a></li>
             </ul>
         </div>
     </div>

@@ -7,11 +7,11 @@
 @extends('layouts.admin')
 
 @section('title')
-    预设配置: {{ $egg->name }} &rarr; 安装程序
+    预设配置: {{ $egg->name }} &rarr; 安装脚本
 @endsection
 
 @section('content-header')
-    <h1>{{ $egg->name }}<small>管理预设使用的安装程序.</small></h1>
+    <h1>{{ $egg->name }}<small>管理预设使用的安装脚本.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">管理</a></li>
         <li><a href="{{ route('admin.nests') }}">预设组</a></li>
@@ -28,7 +28,7 @@
             <ul class="nav nav-tabs">
                 <li><a href="{{ route('admin.nests.egg.view', $egg->id) }}">设置</a></li>
                 <li><a href="{{ route('admin.nests.egg.variables', $egg->id) }}">变量</a></li>
-                <li class="active"><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">安装程序</a></li>
+                <li class="active"><a href="{{ route('admin.nests.egg.scripts', $egg->id) }}">安装脚本</a></li>
             </ul>
         </div>
     </div>
@@ -38,7 +38,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">安装程序</h3>
+                    <h3 class="box-title">安装脚本</h3>
                 </div>
                 @if(! is_null($egg->copyFrom))
                     <div class="box-body">
@@ -53,24 +53,24 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="form-group col-sm-4">
-                            <label class="control-label">复制安装程序于</label>
+                            <label class="control-label">复制安装脚本于</label>
                             <select id="pCopyScriptFrom" name="copy_script_from">
                                 <option value="">无</option>
                                 @foreach($copyFromOptions as $opt)
                                     <option value="{{ $opt->id }}" {{ $egg->copy_script_from !== $opt->id ?: 'selected' }}>{{ $opt->name }}</option>
                                 @endforeach
                             </select>
-                            <p class="text-muted small">如果选中，上方的安装程序将被忽略，所选选项中的安装程序将被使用.</p>
+                            <p class="text-muted small">如果选中，上方的安装脚本将被忽略，所选选项中的安装脚本将被使用.</p>
                         </div>
                         <div class="form-group col-sm-4">
-                            <label class="control-label">安装程序使用的镜像</label>
+                            <label class="control-label">安装脚本使用的镜像</label>
                             <input type="text" name="script_container" class="form-control" value="{{ $egg->script_container }}" />
-                            <p class="text-muted small">运行安装程序时使用的 Docker 镜像，一般集成了程序所需的运行环境.</p>
+                            <p class="text-muted small">运行安装脚本时使用的 Docker 镜像，一般集成了程序所需的运行环境.</p>
                         </div>
                         <div class="form-group col-sm-4">
-                            <label class="control-label">安装程序入口命令</label>
+                            <label class="control-label">安装脚本入口命令</label>
                             <input type="text" name="script_entry" class="form-control" value="{{ $egg->script_entry }}" />
-                            <p class="text-muted small">用于此安装程序的入口命令.</p>
+                            <p class="text-muted small">用于此安装脚本的入口命令.</p>
                         </div>
                     </div>
                     <div class="row">
