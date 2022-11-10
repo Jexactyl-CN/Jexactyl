@@ -30,8 +30,8 @@ const Container = styled.div`
 
 export default () => {
     const { state } = useLocation<undefined | { twoFactorRedirect?: boolean }>();
-    const registration = useStoreState((state) => state.settings.data!.registration);
-    const referrals = useStoreState((state) => state.storefront.data!.referrals);
+    const discord = useStoreState((state) => state.settings.data!.registration.discord);
+    const referrals = useStoreState((state) => state.storefront.data!.referrals.enabled);
 
     return (
         <PageContentBlock title={'Account Overview'}>
@@ -52,12 +52,12 @@ export default () => {
                 <ContentBox title={'更新电子邮箱地址'} showFlashes={'account:email'}>
                     <UpdateEmailAddressForm />
                 </ContentBox>
-                {referrals.enabled && (
+                {referrals && (
                     <ContentBox title={'推广码'} showFlashes={'account:referral'}>
                         <AddReferralCodeForm />
                     </ContentBox>
                 )}
-                {registration.discord && (
+                {discord && (
                     <ContentBox title={'关联 Discord'} showFlashes={'account:discord'}>
                         <DiscordAccountForm />
                     </ContentBox>

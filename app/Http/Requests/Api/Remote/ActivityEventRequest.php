@@ -17,19 +17,17 @@ class ActivityEventRequest extends FormRequest
         return [
             'data' => ['required', 'array'],
             'data.*' => ['array'],
-            'data.*.user' => ['present', 'uuid'],
+            'data.*.user' => ['sometimes', 'nullable', 'uuid'],
             'data.*.server' => ['required', 'uuid'],
             'data.*.event' => ['required', 'string'],
             'data.*.metadata' => ['present', 'nullable', 'array'],
-            'data.*.ip' => ['present', 'ip'],
+            'data.*.ip' => ['sometimes', 'nullable', 'ip'],
             'data.*.timestamp' => ['required', 'string'],
         ];
     }
 
     /**
-     * Returns all of the unique server UUIDs that were recieved in this request.
-     *
-     * @return string[]
+     * Returns all the unique server UUIDs that were received in this request.
      */
     public function servers(): array
     {
@@ -37,9 +35,7 @@ class ActivityEventRequest extends FormRequest
     }
 
     /**
-     * Returns all of the unique user UUIDs that were submitted in this request.
-     *
-     * @return string[]
+     * Returns all the unique user UUIDs that were submitted in this request.
      */
     public function users(): array
     {

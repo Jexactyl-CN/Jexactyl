@@ -66,19 +66,13 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label">币种名称</label>
-                                <div>
-                                    <select name="store:currency" class="form-control">
-                                        <option @if ($currency == 'CNY') selected @endif value="CNY">CNY (人民币)</option>
-                                        <option @if ($currency == 'EUR') selected @endif value="EUR">EUR (欧元)</option>
-                                        <option @if ($currency == 'USD') selected @endif value="USD">USD (美元)</option>
-                                        <option @if ($currency == 'JPY') selected @endif value="JPY">JPY (日元)</option>
-                                        <option @if ($currency == 'GBP') selected @endif value="EUR">GBP (英镑)</option>
-                                        <option @if ($currency == 'CAD') selected @endif value="CAD">CAD (加币)</option>
-                                        <option @if ($currency == 'AUD') selected @endif value="AUD">AUD (澳元)</option>
-                                    </select>
-                                    <p class="text-muted"><small>用于 Jexactyl 的币种名称，这只是积分的名称。</small></p>
-                                </div>
+                                <label class="control-label" for="store:currency">货币名称</label>
+                                <select name="store:currency" id="store:currency" class="form-control">
+                                    @foreach ($currencies as $currency)
+                                        <option @if ($selected_currency === $currency['code']) selected @endif value="{{ $currency['code'] }}">{{ $currency['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <p class="text-muted"><small>用于 Jexactyl 的币种名称，这只是积分的名称。</small></p>
                             </div>
                         </div>
                     </div>

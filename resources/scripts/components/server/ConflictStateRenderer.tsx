@@ -8,6 +8,9 @@ import ServerRestoreSvg from '@/assets/images/server_restore.svg';
 export default () => {
     const status = ServerContext.useStoreState((state) => state.server.data?.status || null);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data?.isTransferring || false);
+    const isNodeUnderMaintenance = ServerContext.useStoreState(
+        (state) => state.server.data?.isNodeUnderMaintenance || false
+    );
 
     return status === 'installing' || status === 'install_failed' ? (
         <ScreenBlock
@@ -20,6 +23,12 @@ export default () => {
             title={'服务器已冻结'}
             image={ServerErrorSvg}
             message={'此服务器已被冻结，您目前无法访问此服务器。'}
+        />
+    ) : isNodeUnderMaintenance ? (
+        <ScreenBlock
+            title={'Node under Maintenance'}
+            image={ServerErrorSvg}
+            message={'The node of this server is currently under maintenance.'}
         />
     ) : (
         <ScreenBlock

@@ -1,11 +1,4 @@
 <?php
-/**
- * Pterodactyl - Panel
- * Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com>.
- *
- * This software is licensed under the terms of the MIT license.
- * https://opensource.org/licenses/MIT
- */
 
 namespace Pterodactyl\Console\Commands\Location;
 
@@ -14,31 +7,18 @@ use Pterodactyl\Services\Locations\LocationCreationService;
 
 class MakeLocationCommand extends Command
 {
-    /**
-     * @var \Pterodactyl\Services\Locations\LocationCreationService
-     */
-    protected $creationService;
-
-    /**
-     * @var string
-     */
     protected $signature = 'p:location:make
                             {--short= : 此地域的标识码名称（例如 us1）。}
                             {--long= : 此地域的描述。}';
 
-    /**
-     * @var string
-     */
     protected $description = '通过 CLI 在系统上创建一个新地域。';
 
     /**
      * Create a new command instance.
      */
-    public function __construct(LocationCreationService $creationService)
+    public function __construct(private LocationCreationService $creationService)
     {
         parent::__construct();
-
-        $this->creationService = $creationService;
     }
 
     /**

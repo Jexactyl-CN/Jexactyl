@@ -6,14 +6,11 @@ use Pterodactyl\Http\Requests\Admin\AdminFormRequest;
 
 class RegistrationFormRequest extends AdminFormRequest
 {
-    /**
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
             'registration:enabled' => 'required|in:true,false',
-
+            'registration:verification' => 'required|boolean',
             'discord:enabled' => 'required|in:true,false',
             'discord:id' => 'required|int',
             'discord:secret' => 'required|string',

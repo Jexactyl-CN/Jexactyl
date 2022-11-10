@@ -67,51 +67,38 @@ class Permission extends Model
 
     /**
      * Should timestamps be used on this model.
-     *
-     * @var bool
      */
     public $timestamps = false;
 
     /**
      * The table associated with the model.
-     *
-     * @var string
      */
     protected $table = 'permissions';
 
     /**
      * Fields that are not mass assignable.
-     *
-     * @var array
      */
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     /**
      * Cast values to correct type.
-     *
-     * @var array
      */
     protected $casts = [
         'subuser_id' => 'integer',
     ];
 
-    /**
-     * @var array
-     */
-    public static $validationRules = [
+    public static array $validationRules = [
         'subuser_id' => 'required|numeric|min:1',
         'permission' => 'required|string',
     ];
 
     /**
-     * All of the permissions available on the system. You should use self::permissions()
+     * All the permissions available on the system. You should use self::permissions()
      * to retrieve them, and not directly access this array as it is subject to change.
-     *
-     * @var array
      *
      * @see \Pterodactyl\Models\Permission::permissions()
      */
-    protected static $permissions = [
+    protected static array $permissions = [
         'websocket' => [
             'description' => '允许用户连接到服务器 websocket，让他们可以访问查看控制台输出和实时服务器统计信息。',
             'keys' => [
@@ -216,7 +203,7 @@ class Permission extends Model
         'settings' => [
             'description' => '控制用户访问此服务器设置的权限。',
             'keys' => [
-                'rename' => '允许用户重命名此服务器。',
+                'rename' => '允许用户重命名此服务器并更改其描述。',
                 'reinstall' => '允许用户执行此服务器的重新安装脚本。',
             ],
         ],
@@ -230,10 +217,8 @@ class Permission extends Model
     ];
 
     /**
-     * Returns all of the permissions available on the system for a user to
+     * Returns all the permissions available on the system for a user to
      * have when controlling a server.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function permissions(): Collection
     {

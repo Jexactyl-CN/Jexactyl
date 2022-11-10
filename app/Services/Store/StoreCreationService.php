@@ -2,52 +2,46 @@
 
 namespace Pterodactyl\Services\Store;
 
+use Throwable;
 use Pterodactyl\Models\Egg;
-use Pterodactyl\Models\User;
 use Pterodactyl\Models\Nest;
 use Pterodactyl\Models\Node;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
+use Pterodactyl\Models\User;
+use Pterodactyl\Models\Server;
 use Pterodactyl\Models\Allocation;
 use Pterodactyl\Models\EggVariable;
+use Pterodactyl\Exceptions\DisplayException;
 use Pterodactyl\Services\Servers\ServerCreationService;
-use Pterodactyl\Services\Store\StoreVerificationService;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Pterodactyl\Http\Requests\Api\Client\Store\CreateServerRequest;
 use Pterodactyl\Exceptions\Service\Deployment\NoViableAllocationException;
 
-class StoreCreationService {
-
-    private ServerCreationService $creation;
-    private SettingsRepositoryInterface $settings;
-    private StoreVerificationService $verification;
-
+class StoreCreationService
+{
     public function __construct(
-        ServerCreationService $creation,
-        SettingsRepositoryInterface $settings,
-        StoreVerificationService $verification
-    )
-    {
-        $this->creation = $creation;
-        $this->settings = $settings;
-        $this->verification = $verification;
+        private ServerCreationService $creation,
+        private SettingsRepositoryInterface $settings,
+        private StoreVerificationService $verification
+    ) {
     }
 
     /**
      * Creates a server on Jexactyl using the Storefront.
+     *
+     * @throws DisplayException
      */
-    public function handle(CreateServerRequest $request): JsonResponse
+    public function handle(CreateServerRequest $request): Server
     {
         $this->verification->handle($request);
-        
+
         $user = User::find($request->user()->id);
         $egg = Egg::find($request->input('egg'));
 
         $nest = Nest::find($request->input('nest'));
         $node = Node::find($request->input('node'));
 
-        $disk = $request->input('disk') * 1024;
-        $memory = $request->input('memory') * 1024;
+        $disk = $request->input('disk');
+        $memory = $request->input('memory');
 
         $data = [
             'name' => $request->input('name'),
@@ -55,7 +49,7 @@ class StoreCreationService {
             'egg_id' => $egg->id,
             'nest_id' => $nest->id,
             'node_id' => $node->id,
-            'allocation_id' => $this->getAlloc($node->id),
+            'allocation_id' => $this->getAllocation($node->id),
             'allocation_limit' => $request->input('ports'),
             'backup_limit' => $request->input('backups'),
             'database_limit' => $request->input('databases'),
@@ -81,12 +75,12 @@ class StoreCreationService {
         }
 
         try {
-            $this->creation->handle($data);
-        } catch (DisplayException $exception) {
+            $server = $this->creation->handle($data);
+        } catch (Throwable $exception) {
             throw new DisplayException('无法部署服务器 - 请联系管理员。');
         }
 
-        return new JsonResponse([], Response::HTTP_NO_CONTENT);
+        return $server;
     }
 
     /**
@@ -94,7 +88,7 @@ class StoreCreationService {
      *
      * @throws NoViableAllocationException
      */
-    protected function getAlloc(int $node): int
+    protected function getAllocatiom(int $node): int
     {
         $allocation = Allocation::where('node_id', $node)
             ->where('server_id', null)
@@ -102,7 +96,7 @@ class StoreCreationService {
 
         if (!$allocation) {
             throw new NoViableAllocationException('没有可用于部署的分配。');
-        };
+        }
 
         return $allocation->id;
     }

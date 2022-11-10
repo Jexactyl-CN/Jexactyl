@@ -12,16 +12,12 @@ use Pterodactyl\Http\Requests\Api\Client\Servers\EditServerRequest;
 
 class EditController extends ClientApiController
 {
-    private ServerEditService $editService;
-
     /**
      * PowerController constructor.
      */
-    public function __construct(ServerEditService $editService)
+    public function __construct(private ServerEditService $editService)
     {
         parent::__construct();
-
-        $this->editService = $editService;
     }
 
     /**
@@ -33,11 +29,11 @@ class EditController extends ClientApiController
     {
         if ($this->settings->get('jexactyl::renewal:editing') != 'true') {
             throw new DisplayException('服务器编辑当前处于禁用状态。');
-        };
+        }
 
         if ($request->user()->id != $server->owner_id) {
             throw new DisplayException('你并不拥有这个服务器，所以你不能编辑资源。');
-        };
+        }
 
         $this->editService->handle($request, $server);
 

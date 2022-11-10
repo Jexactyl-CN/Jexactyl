@@ -40,19 +40,8 @@ class AppSettingsCommand extends Command
         'sync' => 'Sync',
     ];
 
-    /**
-     * @var \Illuminate\Contracts\Console\Kernel
-     */
-    protected $command;
-
-    /**
-     * @var string
-     */
     protected $description = '进行面板的基本环境配置.';
 
-    /**
-     * @var string
-     */
     protected $signature = 'p:environment:setup
                             {--new-salt : 是否为 HashIDs 生成新 Salt,若生成新 Salt 当前用户所有密码验证都会失效，需要重设密码.}
                             {--author= : 在此实例上创建的服务应链接到的电子邮箱.}
@@ -66,19 +55,14 @@ class AppSettingsCommand extends Command
                             {--redis-port= : 连接到 Redis 的端口.}
                             {--settings-ui= : 启用或禁用设置 UI.}';
 
-    /**
-     * @var array
-     */
-    protected $variables = [];
+    protected array $variables = [];
 
     /**
      * AppSettingsCommand constructor.
      */
-    public function __construct(Kernel $command)
+    public function __construct(private Kernel $console)
     {
         parent::__construct();
-
-        $this->command = $command;
     }
 
     /**
@@ -86,7 +70,7 @@ class AppSettingsCommand extends Command
      *
      * @throws \Pterodactyl\Exceptions\PterodactylException
      */
-    public function handle()
+    public function handle(): int
     {
         if (empty(config('hashids.salt')) || $this->option('new-salt')) {
             $this->variables['HASHIDS_SALT'] = str_random(20);
@@ -106,14 +90,14 @@ class AppSettingsCommand extends Command
 
         $this->output->comment('面板 URL 取决于是否使用 SSL 安全连接必须以 https:// 或 http:// 开头. 如果此处填写错误，您的电子邮箱和其他内容将被链接到错误的地址.');
         $this->variables['APP_URL'] = $this->option('url') ?? $this->ask(
-            '面板应用 URL',
-            config('app.url', 'http://example.org')
+            '应用 URL',
+            config('app.url', 'https://example.com')
         );
 
         $this->output->comment('时区应与 PHP 支持的时区之一匹配 北京时区是 Asia/Shanghai。如果不确定，请参考 http://php.net/manual/en/timezones.php.');
         $this->variables['APP_TIMEZONE'] = $this->option('timezone') ?? $this->anticipate(
             '应用时区',
-            DateTimeZone::listIdentifiers(DateTimeZone::ALL),
+            DateTimeZone::listIdentifiers(),
             config('app.timezone')
         );
 
@@ -145,14 +129,16 @@ class AppSettingsCommand extends Command
         }
 
         // Make sure session cookies are set as "secure" when using HTTPS
-        if (strpos($this->variables['APP_URL'], 'https://') === 0) {
+        if (str_starts_with($this->variables['APP_URL'], 'https://')) {
             $this->variables['SESSION_SECURE_COOKIE'] = 'true';
         }
 
         $this->checkForRedis();
         $this->writeToEnvironment($this->variables);
 
-        $this->info($this->command->output());
+        $this->info($this->console->output());
+
+        return 0;
     }
 
     /**

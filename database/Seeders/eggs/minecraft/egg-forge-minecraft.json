@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2022-06-17T08:11:14+03:00",
+    "exported_at": "2022-11-06T06:33:01-05:00",
     "name": "Forge Minecraft",
     "author": "support@pterodactyl.io",
     "description": "Minecraft Forge 服务器。Minecraft Forge 是一个模组 API（应用程序编程接口），它可以更轻松地创建模组，并确保模组彼此兼容。",
@@ -67,12 +67,12 @@
         },
         {
             "name": "Forge 版本",
-            "description": "获取确切的版本。\r\n\r\n例如。1.15.2-31.2.4\r\n\r\n覆盖 MC_VERSION 和 BUILD_TYPE。如果下载服务器文件失败，则安装失败。",
+            "description": "获取准确的版本。\r\n\r\n例如。1.15.2-31.2.4\r\n\r\n覆盖 MC_VERSION 和 BUILD_TYPE。如果下载服务器文件失败，则安装失败。",
             "env_variable": "FORGE_VERSION",
             "default_value": "",
             "user_viewable": true,
             "user_editable": true,
-            "rules": "nullable|string|max:25",
+            "rules": "nullable|regex:\/^[0-9\\.\\-]+$\/",
             "field_type": "text"
         }
     ]

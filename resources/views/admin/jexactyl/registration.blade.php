@@ -24,12 +24,7 @@
         <div class="col-xs-12">
             <form action="{{ route('admin.jexactyl.registration') }}" method="POST">
                 <div class="box
-                @if($enabled == 'true')
-                    box-success
-                @else
-                    box-danger
-                @endif
-                ">
+                @if($enabled == 'true') box-success @else box-danger @endif">
                     <div class="box-header with-border">
                         <i class="fa fa-at"></i> <h3 class="box-title">通过电子邮箱注册 <small>邮箱注册和登录设置。</small></h3>
                     </div>
@@ -48,13 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box
-                @if($discord_enabled == 'true')
-                    box-success
-                @else
-                    box-danger
-                @endif
-                ">
+                <div class="box @if($discord_enabled == 'true') box-success @else box-danger @endif">
                     <div class="box-header with-border">
                         <i class="fa fa-comments-o"></i> <h3 class="box-title">通过 Discord 注册 <small>Discord 注册和登录的设置。</small></h3>
                     </div>
@@ -88,6 +77,20 @@
                                     <p class="text-muted"><small>您的 OAuth 应用程序的客户端密钥。</small></p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-envelope"></i> 电子邮件验证 <small>启用此功能以启用电子邮件验证。</small></h3>
+                    </div>
+                    <div class="box-body row">
+                        <div class="form-group col-md-4">
+                            <label for="verification" class="control-label">状态</label>
+                            <select name="registration:verification" id="verification" class="form-control">
+                                <option value="{{ 1 }}" @if ($verification) selected @endif>启用</option>
+                                <option value="{{ 0 }}" @if (!$verification) selected @endif>禁用</option>
+                            </select>
                         </div>
                     </div>
                 </div>

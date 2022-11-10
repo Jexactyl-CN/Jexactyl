@@ -55,6 +55,7 @@ class NestSeeder extends Seeder
     {
         if (is_null($nest)) {
             $this->creationService->handle([
+                'private' => false,
                 'name' => 'Minecraft',
                 'description' => '我的世界 - Mojang 的经典游戏。 支持 Vanilla MC、Spigot 等！',
             ], 'support@pterodactyl.io');
@@ -70,6 +71,7 @@ class NestSeeder extends Seeder
     {
         if (is_null($nest)) {
             $this->creationService->handle([
+                'private' => false,
                 'name' => 'Source Engine',
                 'description' => '包括对大多数 Source 专用服务器游戏的支持。',
             ], 'support@pterodactyl.io');
@@ -85,6 +87,7 @@ class NestSeeder extends Seeder
     {
         if (is_null($nest)) {
             $this->creationService->handle([
+                'private' => false,
                 'name' => 'Voice Servers',
                 'description' => 'Mumble 和 Teamspeak 3 等语音服务器。',
             ], 'support@pterodactyl.io');
@@ -100,6 +103,7 @@ class NestSeeder extends Seeder
     {
         if (is_null($nest)) {
             $this->creationService->handle([
+                'private' => false,
                 'name' => 'Rust',
                 'description' => '腐蚀 - 一款您必须为生存而战的游戏。',
             ], 'support@pterodactyl.io');

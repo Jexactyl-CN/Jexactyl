@@ -21,24 +21,8 @@ class DatabaseSettingsCommand extends Command
 {
     use EnvironmentWriterTrait;
 
-    /**
-     * @var \Illuminate\Contracts\Console\Kernel
-     */
-    protected $console;
-
-    /**
-     * @var \Illuminate\Database\DatabaseManager
-     */
-    protected $database;
-
-    /**
-     * @var string
-     */
     protected $description = '为面板配置数据库设置.';
 
-    /**
-     * @var string
-     */
     protected $signature = 'p:environment:database
                             {--host= : MySQL服务器的连接地址.}
                             {--port= : MySQL服务器的连接端口.}
@@ -46,30 +30,22 @@ class DatabaseSettingsCommand extends Command
                             {--username= : 连接数据库时使用的用户名.}
                             {--password= : 用于连接此数据库的密码.}';
 
-    /**
-     * @var array
-     */
-    protected $variables = [];
+    protected array $variables = [];
 
     /**
      * DatabaseSettingsCommand constructor.
      */
-    public function __construct(DatabaseManager $database, Kernel $console)
+    public function __construct(private DatabaseManager $database, private Kernel $console)
     {
         parent::__construct();
-
-        $this->console = $console;
-        $this->database = $database;
     }
 
     /**
      * Handle command execution.
      *
-     * @return int
-     *
      * @throws \Pterodactyl\Exceptions\PterodactylException
      */
-    public function handle()
+    public function handle(): int
     {
         $this->output->note('强烈建议不要使用"localhost"作为您的数据库主机，因为我们已经看到频繁的套接字连接问题。如果你想使用本地连接，你应该使用"127.0.0.1".');
         $this->variables['DB_HOST'] = $this->option('host') ?? $this->ask(

@@ -1,12 +1,4 @@
 <?php
-/**
- * Pterodactyl CHINA - Panel
- * Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com>.
- * Simplified Chinese Translation Copyright (c) 2021 - 2022 Ice Ling <iceling@ilwork.cn>
- *
- * This software is licensed under the terms of the MIT license.
- * https://opensource.org/licenses/MIT
- */
 
 namespace Pterodactyl\Console\Commands\Environment;
 
@@ -18,19 +10,8 @@ class EmailSettingsCommand extends Command
 {
     use EnvironmentWriterTrait;
 
-    /**
-     * @var \Illuminate\Contracts\Config\Repository
-     */
-    protected $config;
-
-    /**
-     * @var string
-     */
     protected $description = '设置或更新面板前端的电子邮件发送配置.';
 
-    /**
-     * @var string
-     */
     protected $signature = 'p:environment:mail
                             {--driver= : 要使用的邮件驱动程序.}
                             {--email= : 邮件地址.}
@@ -42,19 +23,14 @@ class EmailSettingsCommand extends Command
                             {--username=}
                             {--password=}';
 
-    /**
-     * @var array
-     */
-    protected $variables = [];
+    protected array $variables = [];
 
     /**
      * EmailSettingsCommand constructor.
      */
-    public function __construct(ConfigRepository $config)
+    public function __construct(private ConfigRepository $config)
     {
         parent::__construct();
-
-        $this->config = $config;
     }
 
     /**
@@ -73,7 +49,7 @@ class EmailSettingsCommand extends Command
                 'mandrill' => 'Mandrill 交易电子邮件',
                 'postmark' => 'Postmarkapp 交易电子邮件',
             ],
-            $this->config->get('mail.driver', 'smtp')
+            $this->config->get('mail.default', 'smtp')
         );
 
         $method = 'setup' . studly_case($this->variables['MAIL_DRIVER']) . '驱动程序设置';
@@ -110,17 +86,17 @@ class EmailSettingsCommand extends Command
     {
         $this->variables['MAIL_HOST'] = $this->option('host') ?? $this->ask(
             trans('command/messages.environment.mail.ask_smtp_host'),
-            $this->config->get('mail.host')
+            $this->config->get('mail.mailers.smtp.host')
         );
 
         $this->variables['MAIL_PORT'] = $this->option('port') ?? $this->ask(
             trans('command/messages.environment.mail.ask_smtp_port'),
-            $this->config->get('mail.port')
+            $this->config->get('mail.mailers.smtp.port')
         );
 
         $this->variables['MAIL_USERNAME'] = $this->option('username') ?? $this->ask(
             trans('command/messages.environment.mail.ask_smtp_username'),
-            $this->config->get('mail.username')
+            $this->config->get('mail.mailers.smtp.username')
         );
 
         $this->variables['MAIL_PASSWORD'] = $this->option('password') ?? $this->secret(

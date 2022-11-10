@@ -12,24 +12,12 @@ use Pterodactyl\Http\Requests\Admin\Jexactyl\RegistrationFormRequest;
 class RegistrationController extends Controller
 {
     /**
-     * @var \Prologue\Alerts\AlertsMessageBag
-     */
-    private $alert;
-
-    /**
-     * @var \Pterodactyl\Contracts\Repository\SettingsRepositoryInterface
-     */
-    private $settings;
-
-    /**
      * RegistrationController constructor.
      */
     public function __construct(
-        AlertsMessageBag $alert,
-        SettingsRepositoryInterface $settings
+        private AlertsMessageBag $alert,
+        private SettingsRepositoryInterface $settings
     ) {
-        $this->alert = $alert;
-        $this->settings = $settings;
     }
 
     /**
@@ -39,6 +27,7 @@ class RegistrationController extends Controller
     {
         return view('admin.jexactyl.registration', [
             'enabled' => $this->settings->get('jexactyl::registration:enabled', false),
+            'verification' => $this->settings->get('jexactyl::registration:verification', false),
 
             'discord_enabled' => $this->settings->get('jexactyl::discord:enabled', false),
             'discord_id' => $this->settings->get('jexactyl::discord:id', 0),

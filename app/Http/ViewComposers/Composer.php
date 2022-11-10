@@ -37,19 +37,19 @@ class Composer
 
     protected function getDatabaseAvailability(): bool
     {
-      $databases = DB::table('databases')->count();
+        $databases = DB::table('database_hosts')->count();
 
-      if ($databases <= 0) {
-        return false;
-      } else {
+        if ($databases <= 0) {
+            return false;
+        }
+
         return true;
-      }
     }
 
     /**
      * Get the setting from the database and cast it to the correct type.
      */
-    protected function setting(string $data, string $type)
+    protected function setting(string $data, int $type)
     {
         $setting = $this->settings->get('jexactyl::' . $data, false);
 

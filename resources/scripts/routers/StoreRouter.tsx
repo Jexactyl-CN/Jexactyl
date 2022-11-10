@@ -1,63 +1,31 @@
 import React from 'react';
-import tw from 'twin.macro';
-import * as Icon from 'react-feather';
-import { useStoreState } from 'easy-peasy';
 import { useLocation } from 'react-router';
 import TransitionRouter from '@/TransitionRouter';
 import SidePanel from '@/components/elements/SidePanel';
 import { NotFound } from '@/components/elements/ScreenBlock';
-import SubNavigation from '@/components/elements/SubNavigation';
 import useWindowDimensions from '@/plugins/useWindowDimensions';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import CreateContainer from '@/components/store/CreateContainer';
-import BalanceContainer from '@/components/store/BalanceContainer';
-import ReferralContainer from '@/components/store/ReferralContainer';
+import PurchaseContainer from '@/components/store/PurchaseContainer';
 import OverviewContainer from '@/components/store/OverviewContainer';
 import MobileNavigation from '@/components/elements/MobileNavigation';
 import ResourcesContainer from '@/components/store/ResourcesContainer';
-import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
 
-const StoreRouter = () => {
-    const match = useRouteMatch<{ id: string }>();
+export default () => {
     const location = useLocation();
     const { width } = useWindowDimensions();
-    const referrals = useStoreState((state) => state.storefront.data!.referrals);
+    const match = useRouteMatch<{ id: string }>();
 
     return (
         <>
             {width >= 1280 ? <SidePanel /> : <MobileNavigation />}
-            <SubNavigation className={'j-down'}>
-                <div>
-                    <NavLink to={`${match.url}`} exact>
-                        <div css={tw`flex items-center justify-between`}>
-                            概览 <Icon.Home css={tw`ml-1`} size={18} />
-                        </div>
-                    </NavLink>
-                    <NavLink to={`${match.url}/balance`}>
-                        <div css={tw`flex items-center justify-between`}>
-                            账户余额 <Icon.DollarSign css={tw`ml-1`} size={18} />
-                        </div>
-                    </NavLink>
-                    <NavLink to={`${match.url}/resources`}>
-                        <div css={tw`flex items-center justify-between`}>
-                            账户资源 <Icon.ShoppingCart css={tw`ml-1`} size={18} />
-                        </div>
-                    </NavLink>
-                    {referrals.enabled && (
-                        <NavLink to={`${match.url}/referrals`}>
-                            <div css={tw`flex items-center justify-between`}>
-                                推广 <Icon.Users css={tw`ml-1`} size={18} />
-                            </div>
-                        </NavLink>
-                    )}
-                </div>
-            </SubNavigation>
             <TransitionRouter>
                 <Switch location={location}>
                     <Route path={`${match.path}`} exact>
                         <OverviewContainer />
                     </Route>
-                    <Route path={`${match.path}/balance`} exact>
-                        <BalanceContainer />
+                    <Route path={`${match.path}/credits`} exact>
+                        <PurchaseContainer />
                     </Route>
                     <Route path={`${match.path}/resources`} exact>
                         <ResourcesContainer />
@@ -65,11 +33,6 @@ const StoreRouter = () => {
                     <Route path={`${match.path}/create`} exact>
                         <CreateContainer />
                     </Route>
-                    {referrals.enabled && (
-                        <Route path={`${match.path}/referrals`} exact>
-                            <ReferralContainer />
-                        </Route>
-                    )}
                     <Route path={'*'}>
                         <NotFound />
                     </Route>
@@ -78,5 +41,3 @@ const StoreRouter = () => {
         </>
     );
 };
-
-export default StoreRouter;

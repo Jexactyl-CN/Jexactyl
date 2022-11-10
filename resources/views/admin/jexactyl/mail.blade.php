@@ -38,14 +38,14 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label">SMTP 主机</label>
                                     <div>
-                                        <input required type="text" class="form-control" name="mail:host" value="{{ old('mail:host', config('mail.host')) }}" />
+                                        <input required type="text" class="form-control" name="mail:host" value="{{ old('mail:host', config('mail.mailers.smtp.host')) }}" />
                                         <p class="text-muted small">输入发送邮件的 SMTP 服务器地址.</p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label class="control-label">SMTP 主机端口</label>
                                     <div>
-                                        <input required type="number" class="form-control" name="mail:port" value="{{ old('mail:port', config('mail.port')) }}" />
+                                        <input required type="number" class="form-control" name="mail:port" value="{{ old('mail:port', config('mail.mailers.smtp.port')) }}" />
                                         <p class="text-muted small">输入发送邮件的 SMTP 服务器端口.</p>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                     <label class="control-label">加密方式</label>
                                     <div>
                                         @php
-                                            $encryption = old('mail:encryption', config('mail.encryption'));
+                                            $encryption = old('mail:encryption', config('mail.mailers.smtp.encryption'));
                                         @endphp
                                         <select name="mail:encryption" class="form-control">
                                             <option value="" @if($encryption === '') selected @endif>无</option>
@@ -66,7 +66,7 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label">用户名 <span class="field-optional"></span></label>
                                     <div>
-                                        <input type="text" class="form-control" name="mail:username" value="{{ old('mail:username', config('mail.username')) }}" />
+                                        <input type="text" class="form-control" name="mail:username" value="{{ old('mail:username', config('mail.mailers.smtp.username')) }}" />
                                         <p class="text-muted small">连接到 SMTP 服务器时使用的用户名.</p>
                                     </div>
                                 </div>

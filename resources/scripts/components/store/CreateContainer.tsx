@@ -12,9 +12,9 @@ import createServer from '@/api/store/createServer';
 import Spinner from '@/components/elements/Spinner';
 import { getNodes, Node } from '@/api/store/getNodes';
 import { getNests, Nest } from '@/api/store/getNests';
-import StoreError from '@/components/elements/StoreError';
-import { Button } from '@/components/elements/button/index';
+import { Button } from '@/components/elements/button';
 import InputSpinner from '@/components/elements/InputSpinner';
+import StoreError from '@/components/elements/store/StoreError';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
 import StoreContainer from '@/components/elements/StoreContainer';
@@ -52,7 +52,7 @@ interface CreateValues {
 export default () => {
     const limit = useStoreState((state) => state.storefront.data!.limit);
     const user = useStoreState((state) => state.user.data!);
-    const { addFlash, clearFlashes, clearAndAddHttpError } = useFlash();
+    const { clearFlashes, clearAndAddHttpError } = useFlash();
     const [loading, setLoading] = useState(false);
     const [resources, setResources] = useState<Resources>();
     const [egg, setEgg] = useState<number>(0);
@@ -63,6 +63,8 @@ export default () => {
     const [nodes, setNodes] = useState<Node[]>();
 
     useEffect(() => {
+        clearFlashes();
+
         getResources().then((resources) => setResources(resources));
 
         getNodes().then((nodes) => {
@@ -95,33 +97,36 @@ export default () => {
         clearFlashes('store:create');
 
         createServer(values, egg, nest, node)
-            .then(() => {
+            .then((data) => {
+                if (!data.id) return;
+
                 setLoading(false);
                 clearFlashes('store:create');
                 // @ts-expect-error this is valid
-                window.location = '/';
+                window.location = `/server/${data.id}`;
             })
             .catch((error) => {
                 setLoading(false);
                 clearAndAddHttpError({ key: 'store:create', error });
-            })
-            .then(() => {
-                addFlash({
-                    type: 'success',
-                    key: 'store:create',
-                    message: '您的服务器已部署完毕，正在安装中。',
-                });
             });
     };
 
-    if (!resources || !nests || !eggs) return <Spinner size={'large'} centered />;
+    if (!resources) return <Spinner size={'large'} centered />;
 
     if (!nodes) {
         return (
             <StoreError
                 message={'没有可用于部署的节点。稍后再试。'}
                 admin={'确保您至少有一个可以部署的节点。'}
-                link={'https://docs.jexactyl.com'}
+            />
+        );
+    }
+
+    if (!nests || !eggs) {
+        return (
+            <StoreError
+                message={'没有可用于部署的服务器类型。 稍后再试。'}
+                admin={'确保您至少有一个在公共预设组中的预设。'}
             />
         );
     }
@@ -134,8 +139,8 @@ export default () => {
                     name: `${user.username}'s server`,
                     description: '在这里写一个简短的描述。',
                     cpu: resources.cpu,
-                    memory: resources.memory / 1024,
-                    disk: resources.disk / 1024,
+                    memory: resources.memory,
+                    disk: resources.disk,
                     ports: resources.ports,
                     backups: resources.backups,
                     databases: resources.databases,
@@ -146,27 +151,22 @@ export default () => {
                 validationSchema={object().shape({
                     name: string().required().min(3),
                     description: string().optional().min(3).max(191),
-                    cpu: number().required().min(50).max(resources.cpu).max(limit.cpu),
-                    memory: number()
-                        .required()
-                        .min(1)
-                        .max(resources.memory / 1024)
-                        .max(limit.memory / 1024),
-                    disk: number()
-                        .required()
-                        .min(1)
-                        .max(resources.disk / 1024)
-                        .max(limit.disk / 1024),
+
+                    cpu: number().required().min(25).max(resources.cpu).max(limit.cpu),
+                    memory: number().required().min(256).max(resources.memory).max(limit.memory),
+                    disk: number().required().min(256).max(resources.disk).max(limit.disk),
+
                     ports: number().required().min(1).max(resources.ports).max(limit.port),
                     backups: number().optional().max(resources.backups).max(limit.backup),
                     databases: number().optional().max(resources.databases).max(limit.database),
-                    nest: number().required().default(1),
-                    egg: number().required().default(1),
-                    node: number().required().min(1),
+
+                    node: number().required().default(node),
+                    nest: number().required().default(nest),
+                    egg: number().required().default(egg),
                 })}
             >
                 <Form>
-                    <div className={'mb-10'}>
+                    <div className={'my-10'}>
                         <Link to={'/store'}>
                             <Button.Text className={'w-full lg:w-1/6 m-2'}>
                                 <Icon.ArrowLeft className={'mr-1'} />
@@ -176,7 +176,7 @@ export default () => {
                         <Link to={'/store/resources'}>
                             <Button className={'w-full lg:w-1/6 m-2'}>
                                 <Icon.ShoppingCart className={'mr-2'} />
-                                购买资源
+                                需要更多资源吗?
                             </Button>
                         </Link>
                     </div>
@@ -205,16 +205,22 @@ export default () => {
                             <p className={'mt-1 text-xs text-gray-400'}>{resources.cpu}% 可用</p>
                         </TitledGreyBox>
                         <TitledGreyBox title={'服务器内存限制'} icon={faMemory} className={'mt-8 sm:mt-0'}>
-                            <Field name={'memory'} />
+                            <div className={'relative'}>
+                                <Field name={'memory'} />
+                                <p className={'absolute text-sm top-1.5 right-2 bg-gray-700 p-2 rounded-lg'}>MB</p>
+                            </div>
                             <p className={'mt-1 text-xs'}>分配可用内存的限制。</p>
                             <p className={'mt-1 text-xs text-gray-400'}>
                                 {megabytesToHuman(resources.memory)} 可用
                             </p>
                         </TitledGreyBox>
                         <TitledGreyBox title={'服务器存储空间限制'} icon={faHdd} className={'mt-8 sm:mt-0'}>
-                            <Field name={'disk'} />
+                            <div className={'relative'}>
+                                <Field name={'disk'} />
+                                <p className={'absolute text-sm top-1.5 right-2 bg-gray-700 p-2 rounded-lg'}>MB</p>
+                            </div>
                             <p className={'mt-1 text-xs'}>分配可用存储空间的限制。</p>
-                            <p className={'mt-1 text-xs text-gray-400'}>{megabytesToHuman(resources.disk)} 可用</p>
+                            <p className={'mt-1 text-xs text-gray-400'}>{megabytesToHuman(resources.disk)} available</p>
                         </TitledGreyBox>
                     </StoreContainer>
                     <h1 className={'j-left text-5xl'}>高级资源限制</h1>

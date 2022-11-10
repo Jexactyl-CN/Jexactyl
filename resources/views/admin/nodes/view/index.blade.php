@@ -1,9 +1,3 @@
-{{-- Pterodactyl CHINA - Panel --}}
-{{-- Copyright (c) 2015 - 2017 Dane Everitt <dane@daneeveritt.com> --}}
-{{-- Simplified Chinese Translation Copyright (c) 2021 - 2022 Ice Ling <iceling@ilwork.cn> --}}
-
-{{-- This software is licensed under the terms of the MIT license. --}}
-{{-- https://opensource.org/licenses/MIT --}}
 @extends('layouts.admin')
 
 @section('title')
@@ -99,7 +93,7 @@
                 <div class="row">
                     @if($node->maintenance_mode)
                     <div class="col-sm-12">
-                        <div class="info-box bg-grey">
+                        <div class="info-box bg-orange">
                             <span class="info-box-icon"><i class="ion ion-wrench"></i></span>
                             <div class="info-box-content" style="padding: 23px 10px 0;">
                                 <span class="info-box-text">此节点状态为</span>

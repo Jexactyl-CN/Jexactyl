@@ -36,7 +36,7 @@
                     @if ($version->isLatestPanel())
                         您正在运行 Jexactyl <code>{{ config('app.version') }}</code>.
                     @else
-                        Jexactyl 不是最新的。最新版本是 <a href="https://github.com/Jexactyl-CN/jexactyl/releases/v{{ $version->getPanel() }}" target="_blank"></a>.
+                        Jexactyl 不是最新的. <code>{{ config('app.version') }} (当前版本) -> <a href="https://github.com/jexactyl-CN/jexactyl/releases/v{{ $version->getPanel() }}" target="_blank">{{ $version->getPanel() }}</a> (latest)</code>
                     @endif
                 </div>
             </div>

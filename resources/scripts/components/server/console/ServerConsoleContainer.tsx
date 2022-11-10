@@ -21,12 +21,15 @@ const ServerConsoleContainer = () => {
     const isInstalling = ServerContext.useStoreState((state) => state.server.isInstalling);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState((state) => state.server.data!.eggFeatures, isEqual);
+    const isNodeUnderMaintenance = ServerContext.useStoreState((state) => state.server.data!.isNodeUnderMaintenance);
 
     return (
-        <ServerContentBlock title={'服务器控制台'}>
-            {(isInstalling || isTransferring) && (
+        <ServerContentBlock title={'控制台'}>
+            {(isNodeUnderMaintenance || isInstalling || isTransferring) && (
                 <Alert type={'warning'} className={'mb-4'}>
-                    {isInstalling
+                    {isNodeUnderMaintenance
+                        ? '此服务器的节点目前正在维护中，所有操作均不可用。'
+                        : isInstalling
                         ? '此服务器当前正在运行其安装过程，大多数操作都是不可用的。'
                         : '此服务器当前正在转移到另一个节点，所有操作都不可用。'}
                 </Alert>

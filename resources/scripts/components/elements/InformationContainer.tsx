@@ -1,3 +1,5 @@
+import useFlash from '@/plugins/useFlash';
+import apiVerify from '@/api/account/verify';
 import { useStoreState } from '@/state/hooks';
 import React, { useEffect, useState } from 'react';
 import { formatDistanceToNowStrict } from 'date-fns';
@@ -6,9 +8,17 @@ import Translate from '@/components/elements/Translate';
 import InformationBox from '@/components/elements/InformationBox';
 import getLatestActivity, { Activity } from '@/api/account/getLatestActivity';
 import { wrapProperties } from '@/components/elements/activity/ActivityLogEntry';
-import { faCircle, faCoins, faExclamationCircle, faScroll, faUserLock } from '@fortawesome/free-solid-svg-icons';
+import {
+    faCircle,
+    faCoins,
+    faExclamationCircle,
+    faScroll,
+    faTimesCircle,
+    faUserLock,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default () => {
+    const { addFlash } = useFlash();
     const [bal, setBal] = useState(0);
     const [activity, setActivity] = useState<Activity>();
     const properties = wrapProperties(activity?.properties);
@@ -19,6 +29,13 @@ export default () => {
         getResources().then((d) => setBal(d.balance));
         getLatestActivity().then((d) => setActivity(d));
     }, []);
+
+    const verify = () => {
+        apiVerify().then((data) => {
+            if (data.success)
+                addFlash({ type: 'info', key: 'dashboard', message: 'Verification email has been resent.' });
+        });
+    };
 
     return (
         <>
@@ -45,19 +62,32 @@ export default () => {
                     </>
                 )}
             </InformationBox>
-            <InformationBox icon={faScroll}>
-                {activity ? (
-                    <>
-                        <span className={'text-neutral-400'}>
-                            <Translate ns={'activity'} values={properties} i18nKey={activity.event.replace(':', '.')} />
-                        </span>
-                        {' - '}
-                        {formatDistanceToNowStrict(activity.timestamp, { addSuffix: true })}
-                    </>
-                ) : (
-                    '无法获取最新的活动日志。'
-                )}
-            </InformationBox>
+            {!user.verified ? (
+                <InformationBox icon={faTimesCircle}>
+                    <span className={'mr-2'}>您必须验证您的帐户才能部署服务器。</span>
+                    <span onClick={verify} className={'cursor-pointer text-blue-400'}>
+                        验证
+                    </span>
+                </InformationBox>
+            ) : (
+                <InformationBox icon={faScroll}>
+                    {activity ? (
+                        <>
+                            <span className={'text-neutral-400'}>
+                                <Translate
+                                    ns={'activity'}
+                                    values={properties}
+                                    i18nKey={activity.event.replace(':', '.')}
+                                />
+                            </span>
+                            {' - '}
+                            {formatDistanceToNowStrict(activity.timestamp, { addSuffix: true })}
+                        </>
+                    ) : (
+                        '无法获取最新的活动日志。'
+                    )}
+                </InformationBox>
+            )}
         </>
     );
 };

@@ -3,8 +3,10 @@
 namespace Pterodactyl\Services\Users;
 
 use Ramsey\Uuid\Uuid;
-use Illuminate\Support\Facades\Http;
+use Pterodactyl\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Hashing\Hasher;
+use Pterodactyl\Notifications\VerifyEmail;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Pterodactyl\Notifications\AccountCreated;
@@ -13,49 +15,28 @@ use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class UserCreationService
 {
-    private SettingsRepositoryInterface $settings;
     /**
-     * @var \Illuminate\Database\ConnectionInterface
+     * UserCreationService constructor.
      */
-    private $connection;
-
-    /**
-     * @var \Illuminate\Contracts\Hashing\Hasher
-     */
-    private $hasher;
-
-    /**
-     * @var \Illuminate\Contracts\Auth\PasswordBroker
-     */
-    private $passwordBroker;
-
-    /**
-     * @var \Pterodactyl\Contracts\Repository\UserRepositoryInterface
-     */
-    private $repository;
-
-    /**
-     * CreationService constructor.
-     */
-    public function __construct(ConnectionInterface $connection, Hasher $hasher, PasswordBroker $passwordBroker, UserRepositoryInterface $repository, SettingsRepositoryInterface $settings)
-    {
-        $this->settings = $settings;
-        $this->connection = $connection;
-        $this->hasher = $hasher;
-        $this->passwordBroker = $passwordBroker;
-        $this->repository = $repository;
+    public function __construct(
+        private ConnectionInterface $connection,
+        private Hasher $hasher,
+        private PasswordBroker $passwordBroker,
+        private UserRepositoryInterface $repository,
+        private SettingsRepositoryInterface $settings
+    ) {
     }
 
     /**
      * Create a new user on the system.
      *
-     * @return \Pterodactyl\Models\User
-     *
      * @throws \Exception
      * @throws \Pterodactyl\Exceptions\Model\DataValidationException
      */
-    public function handle(array $data)
+    public function handle(array $data): User
     {
+        $name = $this->settings->get('settings::app:name', 'Jexactyl');
+
         if (array_key_exists('password', $data) && !empty($data['password'])) {
             $data['password'] = $this->hasher->make($data['password']);
         }
@@ -76,7 +57,6 @@ class UserCreationService
         }
 
         if ($this->settings->get('jexactyl::approvals:enabled') === 'true' && $this->settings->get('jexactyl::approvals:webhook')) {
-            $name = $this->settings->get('settings::app:name', 'Jexactyl-CN');
             $icon = $this->settings->get('settings::app:logo', 'https://avatars.githubusercontent.com/u/109322690');
             $webhook_data = [
                 'username' => $name,
@@ -112,9 +92,32 @@ class UserCreationService
             }
         }
 
+        if (array_has($data, 'verified') && !$data['verified']) {
+            $token = $this->genStr();
+            DB::table('verification_tokens')->insert(['user' => $user->id, 'token' => $token]);
+            $user->notify(new VerifyEmail($user, $name, $token));
+        }
+
         $this->connection->commit();
-        $user->notify(new AccountCreated($user, $token ?? null));
+
+        try {
+            $user->notify(new AccountCreated($user, $token ?? null));
+        } catch (\Exception $e) {
+            // If the email system isn't active, still let users create accounts.
+        }
 
         return $user;
+    }
+
+    private function genStr(): string
+    {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $pieces = [];
+        $max = mb_strlen($chars, '8bit') - 1;
+        for ($i = 0; $i < 32; ++$i) {
+            $pieces[] = $chars[mt_rand(0, $max)];
+        }
+
+        return implode('', $pieces);
     }
 }
