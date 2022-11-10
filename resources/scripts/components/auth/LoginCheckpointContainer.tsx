@@ -57,7 +57,7 @@ const LoginCheckpointContainer = () => {
                     }}
                     css={tw`cursor-pointer text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
                 >
-                    {!isMissingDevice ? "我的设备丢失了" : '我的设备还在'}
+                    {!isMissingDevice ? '我的设备丢失了' : '我的设备还在'}
                 </span>
             </div>
             <div css={tw`mt-6 text-center`}>
