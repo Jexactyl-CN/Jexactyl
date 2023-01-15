@@ -1,3 +1,5 @@
+# 由于汉化工作过于庞大，且本项目不太符合中国人的使用习惯，所以暂停汉化，当然，我很乐意等待有缘人来帮忙汉化
+
 [![Logo Image](https://cdn.discordapp.com/attachments/1012411945141424218/1012430446556090468/JexactylBannerBasic.jpg)](https://jexactyl.com)
 
 ![Tests](https://img.shields.io/github/workflow/status/jexactyl-CN/jexactyl/Build%20Panel)
